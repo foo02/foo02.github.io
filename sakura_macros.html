@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サクラエディタのマクロ</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>サクラエディタのマクロ</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#選択文字列を挟み込むppaマクロ">選択文字列を挟み込むPPAマクロ</a></li>
+    <li><a href="#選択行をコメントアウトするppaマクロ">選択行をコメントアウトするPPAマクロ</a></li>
+    <li><a href="#連番を生成するppaマクロ">連番を生成するPPAマクロ</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p>ここには管理人が自作した<a href="http://sakura-editor.sourceforge.net/">サクラエディタ</a>のマクロ(*.ppa)が置いてあります。ご自由にお使いください。</p>
+<h2 id="選択文字列を挟み込むppaマクロ">選択文字列を挟み込むPPAマクロ</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">// 選択文字列を挟み込むPPAマクロ
+
+var
+ left:String; // 選択文字列の左端に挿入する文字列
+ right:String; // 選択文字列の右端に挿入する文字列
+begin
+ left := &#39;(&#39;;
+ right := &#39;)&#39;;
+ S_InsText(left + S_GetSelectedString(0) + right);
+ S_CancelMode();
+ S_SearchClearMark();
+end.</code></pre></div>
+<h2 id="選択行をコメントアウトするppaマクロ">選択行をコメントアウトするPPAマクロ</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">// 選択行をコメントアウトするPPAマクロ
+
+// 選択した行の行頭に行コメントのデリミタを挿入します。
+// コメントアウトした行を再度選択して実行するとアンコメントアウトします。
+
+var
+ s:String;
+ del:String; // 行コメントのデリミタ
+begin
+ del := &#39;//&#39;;
+ s := Copy(S_GetSelectedString(0), 1, Length(del));
+ if s = del then
+ begin
+ S_ReplaceAll(&#39;^&#39; + del, &#39;&#39;, 132);
+ end
+ else
+ begin
+ S_ReplaceAll(&#39;^.*$&#39;, del, 388);
+ end;
+ S_CancelMode();
+ S_SearchClearMark();
+end.</code></pre></div>
+<h2 id="連番を生成するppaマクロ">連番を生成するPPAマクロ</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">// 連番を生成するPPAマクロ
+ 
+// 以下の書式の文字列に従って連番を生成します。
+ 
+// (プレフィクス)[(開始番号)-(終了番号)](サフィクス)
+ 
+// 上記の書式の文字列の任意の位置にカーソルを移動してから実行してください。
+// 書式に従っていない文字列上で実行した場合は何も起きません。
+// 開始番号が終了番号よりも大きい場合、連番は生成されません。
+// 数字の桁を合わせたい場合は0をパディングして下さい。
+// プレフィクスおよびサフィクスは省略可能です。
+ 
+// 例えば&#34;foo[01-03]bar&#34;と入力して実行すると
+// foo01bar
+// foo02bar
+// foo03bar
+// という文字列を生成します。
+ 
+var
+ i, j:Integer;
+ s:String;
+ i_from:Integer; s_from:String; // 開始番号
+ i_to:Integer; s_to:String; // 終了番号
+ prefix:String; // プレフィクス
+ suffix:String; // サフィクス
+ CRLF:String; // 改行
+begin
+ S_MoveHistSet();
+ S_GoLineTop(9); // 行頭から行末へ向かって走査
+ CRLF := &#39;
+&#39;;
+ // プレフィクスの取得
+ prefix := &#39;&#39;;
+ while TRUE do
+ begin
+ S_Right_Sel();
+ s := S_GetSelectedString(0);
+ if s = &#39;[&#39; then begin S_CancelMode(); break; end;
+ if s = CRLF then begin S_CancelMode(); S_MoveHistPrev(); exit; end;
+ prefix := prefix + s;
+ S_CancelMode();
+ end;
+ 
+ // 開始番号の取得
+ s_from := &#39;&#39;;
+ while TRUE do
+ begin
+ S_Right_Sel();
+ s := S_GetSelectedString(0);
+ if s = &#39;-&#39; then begin S_CancelMode(); break; end;
+ if s = CRLF then begin S_CancelMode(); S_MoveHistPrev(); exit; end;
+ s_from := s_from + s;
+ S_CancelMode();
+ end;
+ 
+ // 開始番号が非数字なら終了
+ i_from := StrToInt(s_from);
+ if (i_from = 0) and (Copy(s_from, Length(s_from), 1) &lt;&gt; &#39;0&#39;) then
+ begin
+ S_CancelMode();
+ S_MoveHistPrev();
+ exit;
+ end;
+ 
+ // 終了番号の取得
+ s_to := &#39;&#39;;
+ while TRUE do
+ begin
+ S_Right_Sel();
+ s := S_GetSelectedString(0);
+ if s = &#39;]&#39; then begin S_CancelMode(); break; end;
+ if s = CRLF then begin S_CancelMode(); S_MoveHistPrev(); exit; end;
+ s_to := s_to + s;
+ S_CancelMode();
+ end;
+ 
+ // 終了番号が非数字なら終了
+ i_to := StrToInt(s_to);
+ if (i_to = 0) and (Copy(s_to, Length(s_to), 1) &lt;&gt; &#39;0&#39;) then
+ begin
+ S_CancelMode();
+ S_MoveHistPrev();
+ exit;
+ end;
+ 
+ // 開始番号が終了番号よりも大きいなら終了
+ if i_from &gt; i_to then
+ begin
+ S_CancelMode();
+ S_MoveHistPrev();
+ exit;
+ end;
+ 
+ // サフィクスの取得
+ suffix := &#39;&#39;;
+ while TRUE do
+ begin
+ S_Right_Sel();
+ s := S_GetSelectedString(0);
+ if s = &#39;&#39; then begin break; end;
+ if s = CRLF then begin S_DeleteBack(); break; end;
+ suffix := suffix + s;
+ S_CancelMode();
+ end;
+ 
+ S_GoLineTop_Sel(0);
+ 
+ // 連番の生成
+ for i := i_from to i_to do
+ begin
+ S_InsText(prefix);
+ for j := 1 to Length(s_from) - Length(IntToStr(i)) do // 0のパディング
+ begin
+ S_InsText(&#39;0&#39;);
+ end;
+ S_InsText(IntToStr(i));
+ S_InsText(suffix);
+ S_Char(13)；
+ end;
+end.</code></pre></div>
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>

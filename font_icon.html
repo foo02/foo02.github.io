@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>フォントとアイコン</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>フォントとアイコン</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#フォント">フォント</a></li>
+    <li><a href="#アイコン">アイコン</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p>アプリケーションで利用できるフォントとアイコンを紹介します。</p>
+<h2 id="フォント">フォント</h2>
+<p>フォントには文字間隔が調整されるプロポーショナルフォントと文字幅が固定されている等幅フォントがあります。Windowsには和文フォントとしてプロポーショナルフォントの<em>ＭＳ Ｐゴシック・ＭＳ Ｐ明朝</em>および等幅フォントの<em>ＭＳ ゴシック・ＭＳ 明朝</em>が用意されています。</p>
+<p>Windowsの<em>ClearType</em>という機能を有効にすればシステム全体のフォントを滑らかにすることができます。DirectWrite(Windowsの文字描画機能)に対応したアプリケーションであればアンチエイリアス(もしくはフォントスムージング)という設定を有効にすることでも同様の効果を得られます。WindowsにはClearTypeに最適化されたフォントとして和文フォントの<em>メイリオ</em>(Meiryo)および欧文フォントの<em>Segoe</em>が用意されています。</p>
+<p>インターフェイスに適したフォントとしては<em>Meiryo UI/Segoe UI/MS UI Gothic</em>があります。文字幅が小さく文字間が狭いので限られた領域に多くの文字を表示することができます。ディスプレイでの表示を前提にデザインされているので視認性にも優れています。</p>
+<p>ネットに公開されているフォントをダウンロード・インストールして使用することもできます。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>プロポーショナルフォント</td>
+<td><a href="http://vlgothic.dicey.org/">VLゴシック</a>/<a href="http://jikasei.me/font/genshin/">源真ゴシック</a></td>
+</tr>
+<tr>
+<td>等幅フォント</td>
+<td><a href="https://github.com/edihbrandon/RictyDiminished">Ricty Diminished</a>/<a href="https://myrica.estable.jp/">Myrica</a></td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://ja.wikipedia.org/wiki/Mozilla_Firefox">Firefox</a>と<a href="https://ja.wikipedia.org/wiki/Mozilla_Thunderbird">Thunderbird</a>でフォントを滑らかにする方法を紹介します。手順は次のとおり。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firefox</td>
+<td>アドレス<em>about:config</em>に移動すると設定エディタが起動するので検索ボックスに<em>gfx.font_rendering.cleartype_params.rendering_mode</em>と入力してその設定値を初期値の-1から5に変更する</td>
+</tr>
+<tr>
+<td>Thunderbird</td>
+<td>メニューから「オプション」を選択して「一般」の最下部にある「設定エディター」をクリックすると設定エディタが起動するので検索ボックスに<em>gfx.font_rendering.cleartype_params.rendering_mode</em>と入力してその設定値を初期値の-1から5に変更する</td>
+</tr>
+</tbody>
+</table>
+<h2 id="アイコン">アイコン</h2>
+<p>いろいろな場面で利用できる便利なアイコンが<a href="http://tango.freedesktop.org/Tango_Icon_Gallery">Tango Icon Gallery - Tango Desktop
+Project</a>で公開されています。</p>
+<figure class="center"><img src="tango.png"/>
+</figure>
+
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>

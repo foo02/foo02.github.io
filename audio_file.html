@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>オーディオファイルの取り扱い</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>オーディオファイルの取り扱い</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#オーディオファイルのノーマライズ">オーディオファイルのノーマライズ</a></li>
+    <li><a href="#オーディオファイルのタギング">オーディオファイルのタギング</a></li>
+    <li><a href="#オーディオファイルのリネーム">オーディオファイルのリネーム</a></li>
+    <li><a href="#オーディオファイルのエンコード">オーディオファイルのエンコード</a>
+      <ul>
+        <li><a href="#エンコーダのインストール">エンコーダのインストール</a></li>
+        <li><a href="#エンコーダの設定">エンコーダの設定</a></li>
+        <li><a href="#エンコードの実行">エンコードの実行</a></li>
+      </ul>
+    </li>
+    <li><a href="#オーディオcdのリッピング">オーディオCDのリッピング</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p><a href="https://ja.wikipedia.org/wiki/Foobar2000">foobar2000</a>でオーディオファイルを取り扱う方法を紹介します。</p>
+<h2 id="オーディオファイルのノーマライズ">オーディオファイルのノーマライズ</h2>
+<p>オーディオファイルの音量を均一化することを<em>ノーマライズ</em>といいます。ノーマライズするとファイルごとの音量の違いを意識する必要がなくなり、音量調節の煩わしさから解放されます。アルバムの曲をノーマライズする方法は次のとおり。</p>
+<ol>
+<li>foobar2000を起動します。</li>
+<li>メニューから <em>File -&gt; Add files</em>または<em>Add folder</em>
+を選択しプレイリストにトラックを追加します。</li>
+<li>追加したトラックを選択して右クリックし <em>Replaygain -&gt; Scan Selection As Single
+Album</em> を選択します。</li>
+<li>スキャンが終了したら<em>Update File Tags</em>をクリックします。この手順を省略したい場合はメニューから <em>File
+-&gt; Preference</em> を選択し表示されたダイアログの左のツリーから <em>Tools -&gt;
+ReplayGainScanner</em> を選択して<em>Quiet mode</em>をチェックし<em>OK</em>をクリックします。</li>
+</ol>
+<p>上の処理でファイルの音声が改変されることはありません。ノーマライズの情報がタグとしてファイルに埋め込まれるだけです。</p>
+<p>ノーマライズした音量で再生する方法はプレーヤごとに異なります。</p>
+<p>ノーマライズした音量を<a href="http://www.un4seen.com/xmplay.html">XMPlay</a>で有効にするには</p>
+<ol>
+<li>XMPlayを起動します。</li>
+<li><em>Options and stuff</em>のボタンをクリックします。</li>
+<li>表示されたダイアログの左のツリーから<em>DSP</em>を選択します。</li>
+<li><em>Replaygain</em>から<em>Album</em>を選択し<em>pre-amp</em>を+8.0程度にします。</li>
+<li>閉じるボタンをクリックします。</li>
+</ol>
+<p>ノーマライズした音量をfoobar2000で有効にするには</p>
+<ol>
+<li>foobar2000を起動します。</li>
+<li>メニューから <em>File -&gt; Preference</em> を選択します。</li>
+<li>表示されたダイアログの左のツリーから <em>Tools -&gt; Plyback</em> を選択します。</li>
+<li><em>Replaygain</em>の<em>Source mode</em>を<em>album</em>、<em>Processing</em>を<em>apply
+gain</em>にします。</li>
+<li><em>Preamp</em>の<em>Without RG Info</em>の音量を-8.0dB程度にします。</li>
+<li><em>OK</em>をクリックします。</li>
+</ol>
+<p>ノーマライズすると音量が小さくなるため、ノーマライズされていないファイルは音量が相対的に大きくなります。両者の音量のバランスをとるためにプリアンプで音量を調整しています。</p>
+<h2 id="オーディオファイルのタギング">オーディオファイルのタギング</h2>
+<p>オーディオファイルには曲情報をタグとして埋め込む(タギングする)ことができます。</p>
+<p>曲情報はデータベース(CDDB)から取得できます。取得方法は次のとおり。</p>
+<ol>
+<li>foobar2000を起動します。</li>
+<li>日本語の曲情報を取得するには日本語のCDDBサーバを登録します。この作業は次回以降は必要ありません。
+<ol>
+<li>メニューから <em>File -&gt; Preference</em> を選択します。</li>
+<li>表示されたダイアログの左のツリーから <em>Tools -&gt; Tagging -&gt; freedb Tagger</em>
+を選択します。</li>
+<li><em>Add</em>をクリックし表示されたダイアログに次のように入力して<em>OK</em>をクリックします。
+<ul>
+<li><em>Server: freedbtest.dyndns.org</em></li>
+<li><em>Port: 80</em></li>
+<li><em>Address: /~cddb/cddb.cgi</em></li>
+</ul>
+</li>
+<li><em>OK</em>をクリックします。</li>
+</ol>
+</li>
+<li>メニューから <em>File -&gt; Add files</em>または<em>Add folder</em>
+を選択しプレイリストにアルバムのトラックを追加します。</li>
+<li>アルバムのトラックをトラック番号順にソートします。</li>
+<li>アルバムのトラックを選択して右クリックし <em>Tagging -&gt; Get Tags From freedb</em> を選択します。</li>
+<li>表示されたダイアログの曲情報を確認し<em>Update
+files</em>をクリックします。このとき取得した曲情報は自由に編集できます。曲情報が存在しなければその旨のメッセージが表示されます。</li>
+</ol>
+<p>タグを編集するには次のようにします。</p>
+<ol>
+<li>foobar2000を起動します。</li>
+<li>メニューから <em>File -&gt; Add files</em>または<em>Add folder</em>
+を選択しプレイリストにトラックを追加します。</li>
+<li>追加したトラックを選択して右クリックし<em>Properties</em>を選択します。</li>
+<li>表示されたダイアログの<em>Value</em>の列をクリックしてタグを入力します。</li>
+<li><em>OK</em>をクリックします。</li>
+</ol>
+<p>上の手順3で複数のトラックを選択すればそれらのタグをまとめて編集することができます。例えばアルバムの曲をまとめてタギングするには次のようにします。</p>
+<ol>
+<li>アルバムの曲を改行で区切ったテキストデータを作成しクリップボードにコピーします。</li>
+<li>上と同様にしてアルバムのトラックをプレイリストに追加します。</li>
+<li>アルバムのトラックをトラック番号順にソートします。</li>
+<li>アルバムのトラックを選択して右クリックし<em>Properties</em>を選択します。</li>
+<li>表示されたダイアログの<em>Track Title</em>をダブルクリックします。</li>
+<li>表示されたダイアログのリストアイテムをすべて選択し右クリックして<em>Paste</em>を選択します。</li>
+<li><em>OK</em>をクリックします。</li>
+<li><em>OK</em>をクリックします。</li>
+</ol>
+<h2 id="オーディオファイルのリネーム">オーディオファイルのリネーム</h2>
+<p>タグを利用してファイルをリネームするには次のようにします。</p>
+<ol>
+<li>foobar2000を起動します。</li>
+<li>メニューから <em>File -&gt; Add files</em>または<em>Add folder</em>
+を選択しプレイリストにトラックを追加します。</li>
+<li>追加したトラックを選択して右クリックし <em>File Operations -&gt; Rename to</em> を選択します。</li>
+<li>表示されたダイアログの<em>File Name
+Pattern</em>にリネーム後のファイル名を指定します。詳細については<a href="http://foobar2000.xrea.jp/index.php?TitleFormatting%20%E8%A7%A3%E8%AA%AC">TitleFormatting
+解説 - foobar2000
+Wiki</a>を参照してください。</li>
+<li><em>Preview</em>で処理内容を確認し<em>Run</em>をクリックします。</li>
+</ol>
+<h2 id="オーディオファイルのエンコード">オーディオファイルのエンコード</h2>
+<p>オーディオファイルを圧縮(エンコード)するには次のようにします。</p>
+<h3 id="エンコーダのインストール">エンコーダのインストール</h3>
+<p>エンコードに必要なソフト(エンコーダ)をダウンロード・インストールします。FLAC,MP3,Vorbisのエンコーダは<a href="http://www.rarewares.org/index.php">RareWares</a>から入手できます。以下のアーカイブをダウンロードしてください。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<ul>
+<li>FLAC: Lossless -&gt; FLAC v.1.3.3</li>
+<li>MP3: MP3 -&gt; LAME Bundles -&gt; LAME 3.100</li>
+<li>Vorbis: Ogg Vorbis -&gt; Oggenc -&gt; Oggenc2.88</li>
+</ul>
+<p>それぞれのアーカイブからflac.exe,lame.exe,oggenc2.exeを取り出しfoobar2000のインストールフォルダに置きます。</p>
+<h3 id="エンコーダの設定">エンコーダの設定</h3>
+<p>エンコーダのパラメータを指定する場合はエンコードのプリセットを追加します。デフォルトのプリセットを使用するのであればこの作業は必要ありません。手順は次のとおり。</p>
+<ol>
+<li>foobar2000を起動します。</li>
+<li>メニューから <em>File -&gt; Add files</em>または<em>Add folder</em>
+を選択しプレイリストにトラックを追加します。</li>
+<li>トラックを選択して右クリックし<em>Convert</em>を選択します。</li>
+<li>表示されたダイアログの<em>Output format</em>をクリックします。</li>
+<li>表示されたダイアログの<em>Add New</em>をクリックします。</li>
+<li>リストから<em>Custom</em>を選択し次のように設定して<em>OK</em>をクリックします。パラメータは必要に応じて変更してください。
+<ul>
+<li><em>FLAC</em>
+<ul>
+<li>Encoder: flac.exe</li>
+<li>Extension: flac</li>
+<li>Parameters: -5 - -o %d</li>
+<li>Format is: lossless</li>
+<li>Highest BPS mode supported: 24</li>
+</ul>
+</li>
+<li><em>MP3</em>
+<ul>
+<li>Encoder: lame.exe</li>
+<li>Extension: mp3</li>
+<li>Parameters: -b 160 - %d</li>
+<li>Format is: lossy</li>
+<li>Highest BPS mode supported: 24</li>
+</ul>
+</li>
+<li><em>Vorbis</em>
+<ul>
+<li>Encoder: oggenc2.exe</li>
+<li>Extension: ogg</li>
+<li>Parameters: -q 4.25 - -o %d</li>
+<li>Format is: lossy</li>
+<li>Highest BPS mode supported: 32</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>続けてプリセットを追加するなら手順5に戻ります。</li>
+<li><em>Cancel</em>をクリックします。</li>
+</ol>
+<h3 id="エンコードの実行">エンコードの実行</h3>
+<p>エンコードの手順は次のとおり。</p>
+<ol>
+<li>foobar2000を起動します。</li>
+<li>メニューから <em>File -&gt; Add files</em>または<em>Add folder</em>
+を選択しプレイリストにトラックを追加します。</li>
+<li>追加したトラックを選択して右クリックし<em>Convert</em>を選択します。</li>
+<li>表示されたダイアログの<em>Output
+format</em>をクリックし出力ファイルのフォーマットを選択して<em>Back</em>をクリックします。</li>
+<li><em>Destination</em>をクリックし以下を指定して<em>Back</em>をクリックします。
+<ul>
+<li><em>Output path</em>から出力ファイルの保存先を選択します。
+<ul>
+<li><em>Ask me later</em>(後で尋ねる)</li>
+<li><em>Source track folder</em>(ソーストラックのフォルダ)</li>
+<li><em>Specify folder</em>(フォルダを指定する)</li>
+</ul>
+</li>
+<li><em>If file already exists</em>から出力先に同名ファイルが存在するときの対処法を選択します。
+<ul>
+<li><em>Ask</em>(尋ねる)</li>
+<li><em>Skip</em>(スキップする)</li>
+<li><em>Overwrite</em>(上書きする)</li>
+</ul>
+</li>
+<li><em>Output style and file name formatting</em>からトラックをどのようにファイル出力するかを選択します。
+<ul>
+<li><em>Convert each track to an individual files</em>(各トラックを個別のファイルに変換する)</li>
+<li><em>Generate multi-track files</em>(マルチトラックファイルを生成する)</li>
+<li><em>Merge all tracks into one output files</em>(すべてのトラックを1つの出力ファイルにマージする)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>Convert</em>をクリックします。</li>
+</ol>
+<p>手順5の<em>Output style and file name formatting</em>について詳しく説明します。</p>
+<p>通常は<em>Convert each track to an individual
+files</em>を選択し1トラックを1ファイルに保存します。<em>Name
+format</em>にはタグを利用したファイル名のフォーマットを指定できます。フォーマットの詳細については<a href="http://foobar2000.xrea.jp/index.php?TitleFormatting%20%E8%A7%A3%E8%AA%AC">TitleFormatting 解説 -
+foobar2000
+Wiki</a>を参照してください。</p>
+<p><em>Generate multi-track
+files</em>は選択したトラックを結合して1つのファイルに保存し、トラックの頭出しに必要なキューシート(*.cue)というテキストファイルを出力します。<em>Name
+format &amp; grouping
+pattern</em>にはファイル名のフォーマットおよびグルーピングのパターンを指定します。デフォルトの指定では出力ファイルがアルバムごとに分割されます。</p>
+<p><em>Merge all tracks into one output
+files</em>は選択したトラックを結合して1つのファイルに保存しますが、キューシートは出力されないのでトラックの頭出しはできません。</p>
+<h2 id="オーディオcdのリッピング">オーディオCDのリッピング</h2>
+<p>オーディオCDの曲をPCに取り込む(リッピングする)には次のようにします。</p>
+<ol>
+<li>CDドライブにリッピングしたいCDをセットしてfoobar2000を起動します。</li>
+<li>メニューから <em>File -&gt; Open audio CD</em> を選択します。</li>
+<li>表示されたダイアログのリストから使用するCDドライブを選択します。</li>
+<li><em>Drive
+settings</em>をクリックし表示されたダイアログからCDドライブを設定します。同じCDドライブを使用する場合この作業は次回以降必要ありません。
+<ol>
+<li><em>auto</em>をクリックし<em>Read offset correction</em>の値を計測します。</li>
+<li><em>OK</em>をクリックします。</li>
+</ol>
+</li>
+<li><em>Rip</em>をクリックします。</li>
+<li>CD情報を取得したい場合は表示されたダイアログの<em>Information
+lookup</em>の<em>Source</em>からCDDB(音楽CDのデータベース)を選択し<em>Lookup</em>をクリックします。
+このとき取得したCD情報は自由に編集できます。CD情報が存在しなければその旨のメッセージが表示されます。日本語のCD情報を取得したい場合は日本語のCDDBを選択する必要があります。</li>
+<li><em>Proceed to the Converter Setup
+dialog</em>をクリックするとエンコードの設定ダイアログが表示されます。取得したCD情報をタギングするために<em>Other</em>をクリックして<em>Transfer
+metadata (tags)</em> をチェックします。<em>ReplayGain-scan output files as
+albums</em>をチェックするとリッピング終了時にノーマライズされます。エンコードの設定が終了したら<em>Convert</em>をクリックします。<em>Rip
+now using one of the existing
+presets</em>をクリックすると下のリストから選択したプリセットを使用してリッピングされます。</li>
+</ol>
+<p>リッピングが終了したら、リッピングしたCDの曲がファイルとして出力先に取り込まれていることを確認してください。</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>エンコーダには32bit版と64bit版があります。自身の環境に合ったものを選択してください。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>

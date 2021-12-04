@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ファイルのバックアップ</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>ファイルのバックアップ</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#バックアップの準備">バックアップの準備</a>
+      <ul>
+        <li><a href="#ハードディスクssdの構成">ハードディスク・SSDの構成</a></li>
+        <li><a href="#保存先バックアップ先のフォルダ">保存先・バックアップ先のフォルダ</a></li>
+      </ul>
+    </li>
+    <li><a href="#バックアップの実行">バックアップの実行</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p>ファイルをバックアップする方法を紹介します。</p>
+<h2 id="バックアップの準備">バックアップの準備</h2>
+<h3 id="ハードディスクssdの構成">ハードディスク・SSDの構成</h3>
+<p>ここでは以下のようなハードディスク・SSDの構成を想定します。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内蔵のハードディスクもしくはSSD</td>
+<td>CドライブおよびDドライブ</td>
+</tr>
+<tr>
+<td>外付けのハードディスク</td>
+<td>Eドライブ</td>
+</tr>
+</tbody>
+</table>
+<p>CドライブにインストールしたWindowsの再インストールに備えてCドライブからDドライブにファイルをバックアップします。自身が作成・ダウンロードしたファイルはすべてDドライブに保存するようにするといいでしょう。さらに内蔵ハードディスクの故障に備えてDドライブのファイルを外付けハードディスクのEドライブにバックアップします。内蔵ハードディスクにCドライブしかない場合は新たにDドライブを作成してください。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h3 id="保存先バックアップ先のフォルダ">保存先・バックアップ先のフォルダ</h3>
+<p>Dドライブには以下のようなフォルダを作成してファイルを分類整理します。プロファイルフォルダのフォルダにはDドライブのフォルダを割り当てておきます。やり方については<a href="http://windows.microsoft.com/ja-JP/windows7/Redirect-a-folder-to-a-new-location">フォルダーを新しい場所にリダイレクトする</a>を参照してください。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AppData</td>
+<td>プロファイルフォルダに保存された設定ファイル (*.ini, *.xml など)</td>
+</tr>
+<tr>
+<td>Program Files</td>
+<td>デフォルトのインストールフォルダに保存された設定ファイル<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></td>
+</tr>
+<tr>
+<td>Applications</td>
+<td>ポータブルアプリケーションそれぞれのインストールフォルダ</td>
+</tr>
+<tr>
+<td>Applications\Common</td>
+<td>複数のアプリケーションが共用するプログラム・ライブラリ (*.dll)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></td>
+</tr>
+<tr>
+<td>Downloads</td>
+<td>Windowsのデフォルトのダウンロード先</td>
+</tr>
+<tr>
+<td>Shortcuts</td>
+<td>アプリケーションのショートカット</td>
+</tr>
+<tr>
+<td>Bookmarks</td>
+<td>ウェブブラウザのブックマーク</td>
+</tr>
+<tr>
+<td>Documents</td>
+<td>ドキュメントファイル (*.odt, *.pdf, *.txt など)</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>イメージファイル (*.bmp, *.jpg, *.png など)</td>
+</tr>
+<tr>
+<td>Audios</td>
+<td>オーディオファイル (*.aac, *.mp3, *.wma など)</td>
+</tr>
+<tr>
+<td>Videos</td>
+<td>ビデオファイル (*.mkv, *.mp4, *.wmv など)</td>
+</tr>
+<tr>
+<td>Archives</td>
+<td>アーカイブファイル (*.7zip, *.zip など)</td>
+</tr>
+<tr>
+<td>RegFiles</td>
+<td>レジストリからエクスポートしたデータ (*.reg)</td>
+</tr>
+<tr>
+<td>ISOs</td>
+<td>CD/DVDなどのイメージファイル (*.iso)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="バックアップの実行">バックアップの実行</h2>
+<p>2つの異なるドライブやフォルダの内容を同期させることを<em>ミラーリング</em>といいます。<a href="http://www2.biglobe.ne.jp/~sota/">Backup</a>を使用すれば簡単にミラーリングすることができます。</p>
+<figure class="center"><img src="backup.png"/>
+</figure>
+
+<p>DドライブをEドライブにミラーリングするには次のようにします。</p>
+<ol>
+<li>Backupを起動します。</li>
+<li>ウィンドウ右の<em>新規追加</em>をクリックします。</li>
+<li>表示されたダイアログの左のツリーから<em>名前</em>を選択し<em>パターン名</em>にバックアップパターンの名称を入力します。</li>
+<li>左のツリーの<em>バックアップ元</em>を選択し<em>追加</em>をクリックして<em>ファイル名/フォルダ名</em>にD:\を指定し<em>OK</em>をクリックします。</li>
+<li>左のツリーの<em>バックアップ先</em>を選択し<em>追加</em>をクリックして<em>フォルダ名</em>にE:\を指定し<em>OK</em>をクリックします。</li>
+<li>左のツリーの<em>除外１</em>を選択しバックアップ先にコピーしたくないファイルやフォルダがあれば指定します。</li>
+<li>左のツリーの<em>除外２</em>を選択しバックアップ先にシステム属性・隠し属性のファイル・フォルダをコピーするかどうかを指定します。コピーするファイルの上限サイズも必要であれば指定します。</li>
+<li><em>OK</em>をクリックします。</li>
+<li>追加したバックアップパターンをリストから選択しウィンドウ下部の<em>バックアップ開始</em>をクリックします。</li>
+</ol>
+<p>上記の手順と同様にして他のバックアップパターンも追加します。ウィンドウ下部の<em>全パターン開始</em>をクリックするとリストの順にすべてのバックアップパターンが実行されます。</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>PCでは物理的に1台しかないハードディスクを論理的に複数のハードディスクとして扱うことができます。具体的にはハードディスクを区画(パーティション)に分割し、その区画にドライブを割り当てます。Cドライブが占有しているハードディスクにDドライブを追加するには、Cドライブのパーティションを圧縮して空いたスペースに新しくパーティションを作成し、そのパーティションにDドライブを割り当てます。やり方については<a href="http://support.microsoft.com/kb/944248/ja">Windows でパーティションを増やすには?</a>を参照してください。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>D\Program FilesにはC\Program Filesのインストールフォルダから必要な設定ファイルのみをコピーします。インストーラによってアプリケーションをインストールする場合はデフォルトのインストール先であるC\Program Filesにインストールするようにしてください。他の場所にインストールすると問題を起こすことがあります。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>このフォルダにパスを通してどのアプリケーションからも参照できるようにしておきます。パスの設定方法については<a href="http://support.microsoft.com/kb/880124/ja">PATH を環境変数に設定する方法</a>を参照してください。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>

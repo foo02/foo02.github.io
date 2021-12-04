@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windowsのカスタマイズ</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>Windowsのカスタマイズ</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#パーティションの分割">パーティションの分割</a></li>
+    <li><a href="#パーティションの暗号化">パーティションの暗号化</a></li>
+    <li><a href="#システムのカスタマイズ">システムのカスタマイズ</a>
+      <ul>
+        <li><a href="#視覚効果の無効化">視覚効果の無効化</a></li>
+        <li><a href="#自動再生の無効化">自動再生の無効化</a></li>
+        <li><a href="#常駐プログラムおよび自動起動の設定">常駐プログラムおよび自動起動の設定</a></li>
+      </ul>
+    </li>
+    <li><a href="#タスクバーのカスタマイズ">タスクバーのカスタマイズ</a></li>
+    <li><a href="#デスクトップのカスタマイズ">デスクトップのカスタマイズ</a></li>
+    <li><a href="#キーバインドのカスタマイズ">キーバインドのカスタマイズ</a></li>
+    <li><a href="#アプリケーションのインストール">アプリケーションのインストール</a>
+      <ul>
+        <li><a href="#ポータブルアプリケーション">ポータブルアプリケーション</a></li>
+      </ul>
+    </li>
+    <li><a href="#ウェブブラウザのカスタマイズ">ウェブブラウザのカスタマイズ</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p>Windowsを使い始める前にやっておくべきことを紹介します。</p>
+<h2 id="パーティションの分割">パーティションの分割</h2>
+<p>WindowsはCドライブにインストールされます。従ってWindowsを再インストールするとCドライブに作成したデータはすべて削除されてしまいます。このような場合に備えてCドライブとは別のドライブにデータを保存するのが一般的です。</p>
+<p>PCでは物理的に1台しかないハードディスクを論理的に複数のハードディスクとして扱うことができます。具体的にはハードディスクを区画(パーティション)に分割し、その区画にドライブを割り当てます。</p>
+<p>Cドライブが占有しているハードディスクにDドライブを追加するには、Cドライブのパーティションを圧縮して空いたスペースに新しくパーティションを作成し、そのパーティションにDドライブを割り当てます。詳細については<a href="http://support.microsoft.com/kb/944248/ja">Windows でパーティションを増やすには?</a>を参照してください。</p>
+<h2 id="パーティションの暗号化">パーティションの暗号化</h2>
+<p>WindowsがインストールされているCドライブ(が割り当てられているパーティション)をシステムドライブ(システムパーティション)といいます。情報漏洩を防ぐためにシステムドライブ以外のドライブのパーティションを<a href="https://ja.wikipedia.org/wiki/VeraCrypt">VeraCrypt</a>で暗号化します。暗号化したパーティションはパスワードを入力して任意のドライブにマウントします。詳細については<a href="https://www.gigafree.net/security/encrypt/VeraCrypt.html">VeraCrypt のダウンロードと使い方 - ｋ本的に無料ソフト・フリーソフト</a>を参照してください。</p>
+<h2 id="システムのカスタマイズ">システムのカスタマイズ</h2>
+<h3 id="視覚効果の無効化">視覚効果の無効化</h3>
+<ol>
+<li>スタートメニューから <em>コントロール パネル -&gt; システムとセキュリティ -&gt; システム -&gt; システムの詳細設定</em> を選択します。</li>
+<li><em>システムのプロパティ</em>ダイアログの <em>パフォーマンス -&gt; 設定</em> をクリックします。</li>
+<li><em>視覚効果</em>タブから<em>パフォーマンスを優先する</em>をチェックして<em>OK</em>をクリックします。</li>
+</ol>
+<h3 id="自動再生の無効化">自動再生の無効化</h3>
+<ol>
+<li>スタートメニューから <em>コントロール パネル -&gt; ハードウェアとサウンド -&gt; 自動再生</em> を選択します。</li>
+<li><em>すべてのメディアとデバイスで自動再生を使う</em>のチェックを外して<em>保存</em>をクリックします。</li>
+</ol>
+<h3 id="常駐プログラムおよび自動起動の設定">常駐プログラムおよび自動起動の設定</h3>
+<ol>
+<li>スタートメニューの<em>プログラムとファイルの検索</em>に<em>msconfig</em>と入力して<em>msconfig.exe</em>を選択します。</li>
+<li><em>システム構成</em>ダイアログの以下を設定して<em>OK</em>をクリックします。</li>
+</ol>
+<ul>
+<li><em>サービス</em>タブからWindowsの稼動中に常駐させる必要のないプログラムのチェックを外します。</li>
+<li><em>スタートアップ</em>タブからWindows起動時に起動する必要のないプログラムのチェックを外します。</li>
+</ul>
+<h2 id="タスクバーのカスタマイズ">タスクバーのカスタマイズ</h2>
+<p>タスクバーは上に配置します。タスクバーの後ろにウィンドウが隠れてしまうのを防ぐには<a href="http://www2.osk.3web.ne.jp/~sm/">助けてってば～!</a>を使用します。</p>
+<h2 id="デスクトップのカスタマイズ">デスクトップのカスタマイズ</h2>
+<p>デスクトップにガジェットを置きたいなら<a href="https://ja.wikipedia.org/wiki/Rainmeter">Rainmeter</a>を使用します。<a href="https://www.deviantart.com/rainmeter/gallery/">Rainmeter DeviantArt Gallery</a>などにスキンが公開されています。</p>
+<h2 id="キーバインドのカスタマイズ">キーバインドのカスタマイズ</h2>
+<p><a href="http://satoshi.web5.jp/">ChangeKey</a>でキーバインドを変更します。押しにくい位置にある使用頻度の高いキー(Ctrlキー・Tabキー・Escキーなど)と押しやすい位置にある使用頻度の低いキー(CapsLockキー・Windowsキー・アプリケーションキーなど)を入れ替えます。</p>
+<h2 id="アプリケーションのインストール">アプリケーションのインストール</h2>
+<p><a href="http://www.forest.impress.co.jp/">窓の杜</a>/<a href="http://www.gigafree.net/">ｋ本的に無料ソフト・フリーソフト</a>/<a href="http://www.softnavi.com/">FreeSoftNavi</a>/<a href="https://freesoft-100.com/">フリーソフト100</a>などを参考にして自分に必要なアプリケーションをインストールします。どのアプリケーションをインストールしたらいいのか分からないのであればとりあえず<a href="/my_software.html">お気に入りのソフト</a>で紹介しているものを使ってみてください。</p>
+<h3 id="ポータブルアプリケーション">ポータブルアプリケーション</h3>
+<p>ポータブルアプリケーションとはUSBメモリなどのメディアに入れて持ち運べる文字通りポータブルなアプリケーションです。ポータブルアプリケーションであればインストール作業が不要であり、インストールフォルダをコピーするだけで設定も含めて簡単にバックアップすることができます。利用可能であればポータブル版のアプリケーションを選択するべきです。インストーラでインストールするアプリケーションでもポータブル版としてインストールすることができるものもあります。主要なアプリケーションのポータブル版は<a href="https://portableapps.com/ja">PortableApps.com</a>から入手することができます。</p>
+<h2 id="ウェブブラウザのカスタマイズ">ウェブブラウザのカスタマイズ</h2>
+<p><a href="https://ja.wikipedia.org/wiki/Microsoft_Edge">Edge</a>/<a href="https://ja.wikipedia.org/wiki/Google_Chrome">Chrome</a>/<a href="https://ja.wikipedia.org/wiki/Mozilla_Firefox">Firefox</a>には自由に機能を追加することができます。</p>
+<p><a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm">uBlock</a>を追加すればウェブページに表示される広告を一掃することができます。インストールしたら次の手順に従って設定します。</p>
+<ol>
+<li><a href="https://github.com/tofukko/filter#%E8%B1%86%E8%85%90%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF">豆腐フィルタ</a>(日本用の外部フィルタ)を追加します。</li>
+<li>ツールバーのuBlockのアイコンをクリックして<em>ダッシュボード</em>のアイコンをクリックします。</li>
+<li>外部フィルターの<em>Myフィルター</em>と<em>豆腐フィルタ</em>を有効にします。SNSのボタンが不要であれば<em>Fanboy’s
+Social Blocking List</em>を有効にします。その他のフィルタは無効にします。</li>
+<li><em>適用</em>をクリックします。</li>
+</ol>
+<p>ウェブページにブロックしたいものがあれば右クリックメニューから<em>要素をブロック</em>を選択します。自動的にフィルタが作成されて<em>Myフィルター</em>に登録することができます。ブロックしたくないウェブサイトは<em>ホワイトリスト</em>に登録します。</p>
+<p>この他にもたくさんの拡張機能があるので自分に合ったものを探してみてください。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>Edge/Chrome</td>
+<td>Firefox</td>
+</tr>
+<tr>
+<td>ポップアップをブロックする</td>
+<td><a href="https://chrome.google.com/webstore/detail/popup-blocker-strict/aefkmifgmaafnojlojpnekbpbmjiiogg">Popup Blocker</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/popup-blocker/?utm_source=addons.mozilla.org&amp;utm_medium=referral&amp;utm_content=search">Popup Blocker</a></td>
+</tr>
+<tr>
+<td>ウェブページの背景を暗くする</td>
+<td><a href="https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh">Dark Reader</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/dark-background-light-text/">Dark Background and Light Text</a></td>
+</tr>
+<tr>
+<td>ブックマークを新しいタブで開く</td>
+<td><a href="https://chrome.google.com/webstore/detail/neater-bookmarks/ofgjggbjanlhbgaemjbkiegeebmccifi">Neater Bookmarks</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/open-bookmarks-in-a-new-tab/">Open bookmarks in new tab</a></td>
+</tr>
+<tr>
+<td>マウスのドラッグ操作を拡張する</td>
+<td><a href="https://chrome.google.com/webstore/detail/quickdrag-for-chrome/dmmpggjbbkfmldkfonjnpbdcmienbjil">QuickDrag for Chrome</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/hyper-drag/">QuickDrag WE</a></td>
+</tr>
+<tr>
+<td>リンクの文字列をコピーする</td>
+<td><a href="https://chrome.google.com/webstore/detail/copy-link-text/loeniidbmeohdlmipbpkfmiogbcncibh">Copy Link Text</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/copy-link-text-webextension/">Copy Link Text</a></td>
+</tr>
+<tr>
+<td>複数ファイルを一括ダウンロードする</td>
+<td><a href="https://chrome.google.com/webstore/detail/downthemall/nljkibfhlpcnanjgbnlnbjecgicbjkge">DownThemAll!</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/downthemall/">DownThemAll!</a></td>
+</tr>
+<tr>
+<td>英語の意味を調べる</td>
+<td><a href="https://chrome.google.com/webstore/detail/mgijmajocgfcbeboacabfgobmjgjcoja">Google Dictionary</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/mousedictionary/">Mouse Dictionary</a></td>
+</tr>
+<tr>
+<td>ウェブページの文章を読み上げる</td>
+<td><a href="https://chrome.google.com/webstore/detail/read-aloud-a-text-to-spee/hdhinadidafjejdhmfkjgnolgimiaplp">Read Aloud</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/read-aloud/">Read Aloud</a></td>
+</tr>
+<tr>
+<td><a href="https://www.youtube.com/?hl=ja&amp;gl=JP">YouTube</a>を使いやすくする</td>
+<td><a href="https://chrome.google.com/webstore/detail/ponfpcnoihfmfllpaingbgckeeldkhle">Enhancer for YouTube</a></td>
+<td><a href="https://addons.mozilla.org/ja/firefox/addon/enhancer-for-youtube/">Enhancer for YouTube</a></td>
+</tr>
+</tbody>
+</table>
+<!-- | [５ちゃんねる](https://5ch.net/)のスレッドを見やすくする | [5CH STYLE FORMAT](https://addons.mozilla.org/ja/firefox/addon/5ch-style-format-2017-ff/) |
+| [radiko](http://radiko.jp/)の地域制限を解除する | [Rajiko](hhttps://addons.mozilla.org/ja/firefox/addon/rajiko/) | -->
+<p>Firefoxのメモリの消費量を抑制するには<a href="https://www.gigafree.net/system/memory/">メモリ解放・最適化ツール - ｋ本的に無料ソフト・フリーソフト</a>で紹介されているようなアプリケーションを使用します。</p>
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>

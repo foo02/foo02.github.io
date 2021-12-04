@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unixの基本操作</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>Unixの基本操作</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#msys2のインストール">MSYS2のインストール</a></li>
+    <li><a href="#ターミナルmintty">ターミナル(mintty)</a>
+      <ul>
+        <li><a href="#コマンドラインの操作">コマンドラインの操作</a></li>
+        <li><a href="#ターミナルの設定">ターミナルの設定</a></li>
+        <li><a href="#ロカールの設定">ロカールの設定</a></li>
+        <li><a href="#マウントfstabの設定">マウント(fstab)の設定</a></li>
+        <li><a href="#manコマンドの日本語化">manコマンドの日本語化</a></li>
+      </ul>
+    </li>
+    <li><a href="#パッケージマネージャpacman">パッケージマネージャ(pacman)</a></li>
+    <li><a href="#コマンドシェルbash">コマンドシェル(bash)</a></li>
+    <li><a href="#テキストエディタvim">テキストエディタ(vim)</a></li>
+    <li><a href="#メールクライアントmutt">メールクライアント(mutt)</a></li>
+    <li><a href="#ウェブブラウザw3m">ウェブブラウザ(w3m)</a></li>
+    <li><a href="#ダウンロードマネージャcurl-wget-aria2">ダウンロードマネージャ(curl, wget, aria2)</a></li>
+    <li><a href="#ftpクライアントlftp">FTPクライアント(lftp)</a></li>
+    <li><a href="#javascriptシェルv8">JavaScriptシェル(V8)</a></li>
+    <li><a href="#電卓bc">電卓(bc)</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p><a href="https://ja.wikipedia.org/wiki/MSYS">MSYS2</a>を使用してUnixの基本操作を説明します。MSYS2はWindowsで動作するコンパクトなUnix環境です。Unixについては<a href="unix_windows">UnixとWindowsの違い</a>を参照してください。</p>
+<h2 id="msys2のインストール">MSYS2のインストール</h2>
+<p>Windowsのユーザ名に日本語が使用されている場合はMSYS2のホームディレクトリのパスを環境変数HOMEに設定しておく必要があります。64bit版ではC:\msys64\home(32bit版ではC:\msys32\home)にホームディレクトリが作成されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">HOME=C:\msys64\home\foo</code></pre></div>
+<p><a href="https://www.msys2.org/">MSYS2
+homepage</a>からMSYS2のインストーラをダウンロードします。64bit版(msys2-x86_64-*.exe)と32bit版(msys2-i686-*.exe)が置いてあるので自身の環境に合ったものを選択してください。</p>
+<p>インストーラを実行しセットアップウィザードの指示に従ってインストールします。インストール先はデフォルトのままCドライブの直下にしておくのが無難です。パスにスペースなどが含まれていると問題が起きる可能性があります。</p>
+<p><em>Run MSYS2
+now</em>をチェックしてセットアップウィザードを終了するとターミナル(コマンドの入出力を行うアプリケーション)が起動します。次のコマンドを入力してMSYS2にインストールされているパッケージをアップデートします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Syu</code></pre></div>
+<p>以下のメッセージが表示されたらターミナルウィンドウの閉じるボタンをクリックします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">警告: terminate MSYS2 without returning to shell and check for updates again
+警告: for example close your terminal window instead of calling exit</code></pre></div>
+<p>スタートメニューからMSYS2を起動します。再度アップデートしてすべてのパッケージが最新であることを確認してください。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Syu</code></pre></div>
+<!--
+続けて以下のパッケージをインストールします。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S base-devel</code></pre></div>
+-->
+<h2 id="ターミナルmintty">ターミナル(mintty)</h2>
+<p>MSYS2を起動するとrootユーザでログインした状態でターミナル<a href="https://ja.wikipedia.org/wiki/Mintty">mintty</a>が起動します。MSYS2ではすべての操作をrootユーザで行います。</p>
+<h3 id="コマンドラインの操作">コマンドラインの操作</h3>
+<p>ターミナルのコマンドラインは以下のようなキー操作で編集します。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ctrl+j もしくは Ctrl+m もしくは Enter</td>
+<td>入力したコマンドを実行</td>
+</tr>
+<tr>
+<td>Ctrl+h もしくは BackSpace</td>
+<td>カーソル位置の手前の文字を削除</td>
+</tr>
+<tr>
+<td>Ctrl+d もしくは Del</td>
+<td>カーソル位置の文字を削除</td>
+</tr>
+<tr>
+<td>Ctrl+k</td>
+<td>カーソル位置から行末の文字列を削除</td>
+</tr>
+<tr>
+<td>Ctrl+u</td>
+<td>カーソル位置から行頭の文字列を削除</td>
+</tr>
+<tr>
+<td>Ctrl+f もしくは →</td>
+<td>カーソルを右に移動</td>
+</tr>
+<tr>
+<td>Ctrl+b もしくは ←</td>
+<td>カーソルを左に移動</td>
+</tr>
+<tr>
+<td>Ctrl+e</td>
+<td>カーソルを行末に移動</td>
+</tr>
+<tr>
+<td>Ctrl+a</td>
+<td>カーソルを行頭に移動</td>
+</tr>
+<tr>
+<td>Ctrl+i もしくは Tab</td>
+<td>コマンド名・ファイル名・パス名を補完</td>
+</tr>
+<tr>
+<td>Ctrl+i+i もしくは Tab Tab</td>
+<td>補完候補を表示</td>
+</tr>
+<tr>
+<td>Ctrl+n もしくは ↓</td>
+<td>実行したコマンドの履歴を順方向に縦覧</td>
+</tr>
+<tr>
+<td>Ctrl+p もしくは ↑</td>
+<td>実行したコマンドの履歴を逆方向に縦覧</td>
+</tr>
+<tr>
+<td>Ctrl+s</td>
+<td>実行したコマンドの履歴を順方向に検索</td>
+</tr>
+<tr>
+<td>Ctrl+r</td>
+<td>実行したコマンドの履歴を逆方向に検索</td>
+</tr>
+<tr>
+<td>Ctrl+g</td>
+<td>コマンドの検索を終了</td>
+</tr>
+<tr>
+<td>Alt+. もしくは Ctrl+[. もしくは Esc.</td>
+<td>直前に実行したコマンドの最後の単語を挿入</td>
+</tr>
+</tbody>
+</table>
+<p>ターミナルの画面出力を消去するにはCtrl+lを押します。</p>
+<p>コマンドexitを入力するとログアウトしてターミナルが終了します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># exit</code></pre></div>
+<h3 id="ターミナルの設定">ターミナルの設定</h3>
+<p>右クリックメニューから<em>Options</em>を選択するとターミナルの見た目や機能を細かく設定することができます。とりあえず表示されたダイアログの左のリストから<em>Window</em>を選択して<em>UI language</em>を<em>ja</em>にして<em>Save</em>をクリックします。これでインターフェースが日本語で表示されるようになります。</p>
+<p>フォントと配色は大切なので最初に設定しておきましょう。
+設定ダイアログの左のリストから<em>テキスト</em>を選択するとフォントを指定することができます。見やすいフォントとしては<a href="https://github.com/edihbrandon/RictyDiminished">Ricty Diminished</a>や<a href="https://myrica.estable.jp/">Myrica</a>などがあります。</p>
+<p>設定ダイアログの左のリストから<em>外観</em>を選択すると配色を指定することができます。配色のテーマ(*.minttyrc)は~/.mintty/themesに置くと追加されます。<a href="https://github.com/oumu/mintty-color-schemes">mintty-color-schemes</a>のテーマを以下のようにして追加します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S git
+# cd
+# git clone https://github.com/oumu/mintty-color-schemes.git
+# mkdir -pv .mintty/themes
+# mv -v mintty-color-schemes/*.minttyrc .mintty/themes
+# rm -rfv mintty-color-schemes</code></pre></div>
+<h3 id="ロカールの設定">ロカールの設定</h3>
+<p>下のコマンドを入力すると現在のロカール(国・地域や言語の設定)が表示されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># echo $LANG</code></pre></div>
+<p>デフォルトのロカールはja_JP.UTF-8です。これの意味はja(言語は日本語)_JP(国は日本).UTF-8(使用する文字コードはUTF-8)です。ロカールの設定を変更する必要はありません。日本語入力についても設定することはありません。Windowsと同じ方法で日本語を入力することができます。</p>
+<h3 id="マウントfstabの設定">マウント(fstab)の設定</h3>
+<p>起動時にデバイスやディレクトリをマウントするには下のように/etc/fstabを記述します。パスの区切りは&quot;/&quot;(スラッシュ)でも&quot;\&quot;(バックスラッシュ)でも構いません。スペースは\040に置き換えます。/etc/fstabの設定を反映させるにはMSYS2を再起動する必要があります。</p>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">/etc/fstab</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">C:\Users /users
+C:\Program\040Files /pf
+C:\Windows\System32 /sys32</code></pre></div></div>
+</figure>
+<h3 id="manコマンドの日本語化">manコマンドの日本語化</h3>
+<p>コマンドのヘルプを表示するmanコマンドを日本語化するには次のようにします。</p>
+<p>コマンドidを入力して自身のユーザ名と属しているグループ名を確認します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># id</code></pre></div>
+<p>確認したユーザ名とグループ名を途中の質問で入力します。デフォルト(root)のままだとインストールに失敗します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># cd
+# wget https://linuxjm.osdn.jp/man-pages-ja-20191115.tar.gz
+# tar xzvf man-pages-ja-20191115.tar.gz
+# cd man-pages-ja-20191115
+# make config
+# make install
+# mandb
+# cd
+# rm man-pages-ja-20191115.tar.gz
+# rm -rfv man-pages-ja-20191115</code></pre></div>
+<figure class="center"><img src="man.png"/>
+</figure>
+
+<h2 id="パッケージマネージャpacman">パッケージマネージャ(pacman)</h2>
+<p>MSYS2のパッケージマネージャは<a href="https://ja.wikipedia.org/wiki/Pacman">pacman</a>です。詳細については<a href="https://wiki.archlinux.jp/index.php/Pacman">pacman - ArchWiki</a>を参照してください。</p>
+<p>ヘルプを表示</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -h</code></pre></div>
+<p>オペレーション-Sのオプションを表示</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S -h</code></pre></div>
+<p>インストール済みのパッケージを表示</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Qqe</code></pre></div>
+<p>インストール済みのパッケージをアップデート</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Syu</code></pre></div>
+<p>パッケージグループのリストを表示</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Sg</code></pre></div>
+<p>パッケージグループfooに含まれているパッケージを表示</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Sgg foo</code></pre></div>
+<p>名前にfooを含むパッケージを検索(正規表現も使用可)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Ss foo
+# pacman -Sl | grep foo</code></pre></div>
+<p>パッケージfooの詳細を確認</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Si foo</code></pre></div>
+<p>パッケージfooをインストール</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S foo</code></pre></div>
+<p>パッケージfooをアンインストール</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Rs foo</code></pre></div>
+<p>未使用のキャッシュを削除</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -Sc</code></pre></div>
+<h2 id="コマンドシェルbash">コマンドシェル(bash)</h2>
+<p>入力したコマンドはシェルによって実行されます。ここではデフォルトのシェル<a href="https://ja.wikipedia.org/wiki/Bash">bash</a>を使用します。詳細については<a href="http://se.cite.ehime-u.ac.jp/~aman/memo/bash/">bash入門</a>や<a href="http://x68000.q-e-d.net/~68user/unix/">UNIXの部屋</a>を参照してください。</p>
+<p>シェルの基本的なコマンドを以下に示します。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cat</td>
+<td>ファイルの内容を表示、ファイルを連結</td>
+</tr>
+<tr>
+<td>cd</td>
+<td>カレントディレクトリを変更</td>
+</tr>
+<tr>
+<td>chmod</td>
+<td>ファイル・ディレクトリのパーミッション・属性を変更</td>
+</tr>
+<tr>
+<td>chown</td>
+<td>ファイルの所有者・グループを変更</td>
+</tr>
+<tr>
+<td>cp</td>
+<td>ファイル・ディレクトリをコピー</td>
+</tr>
+<tr>
+<td>find</td>
+<td>ファイル・ディレクトリを検索</td>
+</tr>
+<tr>
+<td>grep</td>
+<td>指定したパターンにマッチする行を検索</td>
+</tr>
+<tr>
+<td>gzip, bzip2</td>
+<td>ファイルを圧縮・展開</td>
+</tr>
+<tr>
+<td>less</td>
+<td>テキストファイルの内容を表示</td>
+</tr>
+<tr>
+<td>ls</td>
+<td>ディレクトリのファイルリストを表示</td>
+</tr>
+<tr>
+<td>man</td>
+<td>コマンドのマニュアルを表示</td>
+</tr>
+<tr>
+<td>mkdir</td>
+<td>新しいディレクトリを作成</td>
+</tr>
+<tr>
+<td>mv</td>
+<td>ファイル・ディレクトリを移動・リネーム</td>
+</tr>
+<tr>
+<td>pwd</td>
+<td>カレントディレクトリのパスを表示</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>ファイル・ディレクトリを削除</td>
+</tr>
+<tr>
+<td>tar</td>
+<td>複数ファイルを単一ファイルにアーカイブ</td>
+</tr>
+</tbody>
+</table>
+<p>実行中のコマンドを強制的に停止するにはCtrl+cを押します。</p>
+<p>コマンドのオプションは-(ハイフン)で指定します。-(ハイフン)が単独で使用された場合は標準入出力として扱われます。スペース・タブ・改行はデリミタ(区切り文字)として機能します。</p>
+<p>シェルには以下のメタキャラクタ(特殊文字)が存在しこれらの文字はシェルの中で特別な意味を持ちます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">&#34; $ &amp; &#39; ( ) * ; &lt; &gt; ? [ \ ] ^ ` { | } ~</code></pre></div>
+<p>メタキャラクタを普通の文字として扱いたい場合は\(バックスラッシュ)でエスケープします。シングルクォートで括れば文字列内のメタキャラクタをエスケープできます。</p>
+<p>ワイルドカードを使用すればパターンにマッチする複数のファイルを一括で処理できます。詳細については<a href="http://x68000.q-e-d.net/~68user/unix/pickup?%A5%D5%A5%A1%A5%A4%A5%EB%A5%B0%A5%ED%A5%D6">用語集:ファイルグロブ: UNIX/Linuxの部屋</a>を参照してください。</p>
+<p>パイプやリダイレクトを使用すればコマンドをつなげて実行したり入出力先を変更したりすることができます。詳細については<a href="http://x68000.q-e-d.net/~68user/unix/pickup?%A5%EA%A5%C0%A5%A4%A5%EC%A5%AF%A5%C8">用語集:リダイレクト: UNIX/Linuxの部屋</a>や<a href="https://shellscript.sunone.me/input_output.html">入力と出力 | UNIX &amp; Linux コマンド・シェルスクリプト リファレンス</a>を参照してください。</p>
+<p>リダイレクトについてかみ砕いて説明します。知っておくべきことは次のとおり。</p>
+<ul>
+<li>ディスクリプタは入出力先に割り当てられた番号</li>
+<li>標準入力(キーボード)のディスクリプタは0</li>
+<li>標準出力(ディスプレイ)のディスクリプタは1</li>
+<li>標準エラー出力(ディスプレイ)のディスクリプタは2</li>
+</ul>
+<p>ディスクリプタn, mおよびファイルfooに対して以下のように記述します。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>n&lt;foo</td>
+<td>入力nをファイルfooにセット(n=0ならnを省略可)</td>
+</tr>
+<tr>
+<td>n&lt;&amp;m</td>
+<td>入力nを入力mにセット(n=0ならnを省略可)</td>
+</tr>
+<tr>
+<td>n&gt;foo</td>
+<td>出力nをファイルfooにセット(n=1ならnを省略可)</td>
+</tr>
+<tr>
+<td>n&gt;&amp;m</td>
+<td>出力nを出力mにセット(n=1ならnを省略可)</td>
+</tr>
+<tr>
+<td>&amp;&gt;foo もしくは &gt;&amp;foo</td>
+<td>標準出力・標準エラー出力をまとめてファイルfooに出力</td>
+</tr>
+</tbody>
+</table>
+<p>bashの設定は~/.bashrcに記述します。変更した設定を有効にするにはsource(もしくは.(ドット))コマンドを使用して設定ファイルを読み込む必要があります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># source ~/.bashrc
+# . ~/.bashrc</code></pre></div>
+<p>以下のようにコマンドのエイリアス(alias: 別名)を定義することができます。<!-- 詳細については[コマンド:alias: UNIX/Linuxの部屋](http://x68000.q-e-d.net/~68user/unix/pickup?alias)を参照してください。 --></p>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/.bashrc</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">alias c<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;clear&#39;</span>
+alias l<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;less -gmj10&#39;</span>
+alias ls<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls -F --color=auto --group-directories-first&#39;</span>
+alias la<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls -A&#39;</span>
+alias ll<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls -Ahl --time-style=long-iso&#39;</span>
+alias ..<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cd ../&#39;</span>
+alias ....<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cd ../../&#39;</span>
+alias cp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;cp -iv&#39;</span>
+alias mv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mv -iv&#39;</span>
+alias rm<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rm -iv&#39;</span>
+alias mkdir<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;mkdir -v&#39;</span>
+alias rmdir<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;rmdir -v&#39;</span>
+alias chmod<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;chmod -v&#39;</span>
+alias chown<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;chown -v&#39;</span>
+alias vi<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vim&#39;</span>
+alias v<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;vim -R&#39;</span></code></pre></div></div>
+</figure>
+<p>エイリアスを一時的に無効にしたい場合はコマンドの先頭に\(バックスラッシュ)をつけます。例えばエイリアスとして設定したlsコマンドを本来のlsコマンドとして実行したいときは次のように入力します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># \ls</code></pre></div>
+<!--
+~/.bash\_aliasを有効にするには~/.bashrc内の以下の箇所のコメントを解除します。
+
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/.bashrc</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -f <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.bash_aliases&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+  source <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.bash_aliases&#34;</span>
+<span style="color:#66d9ef">fi</span></code></pre></div></div>
+</figure>
+-->
+<p>以下のように関数を定義してコマンドを自作することもできます。</p>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/.bashrc</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#75715e"># cdコマンドを実行するとlsコマンドを実行する</span>
+<span style="color:#66d9ef">function</span> cd <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">if</span> builtin cd $1; <span style="color:#66d9ef">then</span>
+    ls
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+  <span style="color:#66d9ef">else</span>
+    echo <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">に移動できません&#34;</span> 1&gt;&amp;<span style="color:#ae81ff">2</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">fi</span>
+<span style="color:#f92672">}</span></code></pre></div></div>
+</figure>
+<p>一度にたくさんのコマンドを実行したい場合はシェルスクリプトを利用しましょう。詳細については<a href="https://maku77.github.io/linux/">まくまく Linux/Shell ノート</a>や<a href="http://shellscript.sunone.me/">UNIX &amp; Linux コマンド・シェルスクリプト リファレンス</a>を参照してください。</p>
+<!--
+~/.bash\_functionsを有効にするには~/.bashrc内の以下の箇所のコメントを解除します。
+
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/.bashrc</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -f <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.bash_functions&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+  source <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span><span style="color:#e6db74">/.bash_functions&#34;</span>
+<span style="color:#66d9ef">fi</span></code></pre></div></div>
+</figure>
+-->
+<h2 id="テキストエディタvim">テキストエディタ(vim)</h2>
+<p>ここではテキストエディタとして<a href="https://ja.wikipedia.org/wiki/Vim">vim</a>を使用します。詳細については<a href="https://maku77.github.io/vim/">まくまく Vim ノート</a>や<a href="http://nanasi.jp/">名無しのvim使い</a>を参照してください。</p>
+<p>vimをインストールします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S vim</code></pre></div>
+<figure class="center"><img src="vim.png"/>
+</figure>
+
+<p>vimには<em>ノーマル/インサート/ビジュアル/コマンド</em>の4つのモードがあります。編集コマンドを受け付けるノーマルモードで起動し、ノーマルモードを軸に他の3つのモードに遷移します。文字を入力するときはインサートモードに移行します。範囲を選択するときはビジュアルモードに移行します。検索や置換などのコマンドを実行するときはコマンドモードに移行します。ノーマルモードもしくはビジュアルモードで:(コロン)を入力するとコマンドモードに移行し、下のコマンドラインから:に続けて任意のコマンドを入力することができます。ノーマルモードに戻るにはEsc(Ctrl+[)もしくはCtrl+cを入力します。</p>
+<figure class="center"><img src="vim_mode.png"/>
+</figure>
+
+<p>vimの基本的なコマンドを以下に示します。詳細については<a href="https://qiita.com/jintz/items/d357478271179c90ffab">VSCodeで始めるVim</a>を参照してください。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>ノーマルモード</em></td>
+<td></td>
+</tr>
+<tr>
+<td>カーソルを下に移動</td>
+<td>j もしくは Ctrl+n</td>
+</tr>
+<tr>
+<td>カーソルを上に移動</td>
+<td>k もしくは Ctrl+p</td>
+</tr>
+<tr>
+<td>カーソルを右に移動</td>
+<td>l もしくは Space</td>
+</tr>
+<tr>
+<td>カーソルを左に移動</td>
+<td>h もしくは BackSpace</td>
+</tr>
+<tr>
+<td>カーソルを次の単語に移動</td>
+<td>w もしくは W (記号を無視)</td>
+</tr>
+<tr>
+<td>カーソルを次の単語の末尾に移動</td>
+<td>e もしくは E (記号を無視)</td>
+</tr>
+<tr>
+<td>カーソルを前の単語に移動</td>
+<td>b もしくは B (記号を無視)</td>
+</tr>
+<tr>
+<td>カーソルを前の単語の末尾に移動</td>
+<td>ge もしくは gE (記号を無視)</td>
+</tr>
+<tr>
+<td>カーソルを右方向・左方向の最初のjに移動</td>
+<td>fj ↔ Fj</td>
+</tr>
+<tr>
+<td>カーソルを右方向・左方向の最初のjの手前に移動</td>
+<td>tj ↔ Tj</td>
+</tr>
+<tr>
+<td>カーソルを行末に移動</td>
+<td>$</td>
+</tr>
+<tr>
+<td>カーソルを行頭に移動</td>
+<td>0 もしくは ^ (行頭の空白文字を無視)</td>
+</tr>
+<tr>
+<td>カーソルを128行目に移動</td>
+<td>128G</td>
+</tr>
+<tr>
+<td>カーソルを最後の行に移動</td>
+<td>G</td>
+</tr>
+<tr>
+<td>カーソルを最初の行に移動</td>
+<td>gg</td>
+</tr>
+<tr>
+<td>画面を下にスクロール</td>
+<td>Ctrl+f もしくは Ctrl+d (半画面)</td>
+</tr>
+<tr>
+<td>画面を上にスクロール</td>
+<td>Ctrl+b もしくは Ctrl+u (半画面)</td>
+</tr>
+<tr>
+<td>カーソル位置の文字を削除</td>
+<td>x</td>
+</tr>
+<tr>
+<td>カーソル位置の手前の文字を削除</td>
+<td>X</td>
+</tr>
+<tr>
+<td>カーソル位置の単語をカット</td>
+<td>diw</td>
+</tr>
+<tr>
+<td>カーソル位置の単語をコピー</td>
+<td>yiw</td>
+</tr>
+<tr>
+<td>カーソル位置から右側を削除</td>
+<td>D</td>
+</tr>
+<tr>
+<td>カーソル位置の行をカット</td>
+<td>dd</td>
+</tr>
+<tr>
+<td>カーソル位置の行をコピー</td>
+<td>yy</td>
+</tr>
+<tr>
+<td>カーソル位置(行ならカーソル位置の下)にペースト</td>
+<td>p</td>
+</tr>
+<tr>
+<td>カーソル位置の手前(行ならカーソル位置の上)にペースト</td>
+<td>P</td>
+</tr>
+<tr>
+<td>行を連結</td>
+<td>gJ もしくは J (間にスペースを1文字挿入)</td>
+</tr>
+<tr>
+<td>アンドゥ</td>
+<td>u もしくは U (行全体)</td>
+</tr>
+<tr>
+<td>リドゥ</td>
+<td>Ctrl+r</td>
+</tr>
+<tr>
+<td>直前の操作の繰り返し</td>
+<td>.</td>
+</tr>
+<tr>
+<td>カーソル位置の数字をインクリメント・デクリメント</td>
+<td>Ctrl+a ↔ Ctrl+x</td>
+</tr>
+<tr>
+<td>対応する括弧を検索</td>
+<td>%</td>
+</tr>
+<tr>
+<td>カーソル位置の文字を置換</td>
+<td>r</td>
+</tr>
+<tr>
+<td>カーソル位置の文字列を置換</td>
+<td>R</td>
+</tr>
+<tr>
+<td><em>ノーマルモード → インサートモード</em></td>
+<td></td>
+</tr>
+<tr>
+<td>カーソル位置・カーソル位置の後ろから入力開始</td>
+<td>i ↔ a</td>
+</tr>
+<tr>
+<td>カーソル位置の行頭・行末から入力開始</td>
+<td>I ↔ A</td>
+</tr>
+<tr>
+<td>カーソル位置の下・上に挿入した空行から入力開始</td>
+<td>o ↔ O</td>
+</tr>
+<tr>
+<td>カーソル位置の文字・行を削除してから入力開始</td>
+<td>s ↔ S</td>
+</tr>
+<tr>
+<td>カーソル位置の単語を削除してから入力開始</td>
+<td>ciw</td>
+</tr>
+<tr>
+<td>カーソル位置の&quot;&ldquo;の中身を削除してから入力開始</td>
+<td>ci&rdquo;</td>
+</tr>
+<tr>
+<td>カーソル位置から右側を削除して入力開始</td>
+<td>C</td>
+</tr>
+<tr>
+<td><em>ノーマルモード→ ビジュアルモード</em></td>
+<td></td>
+</tr>
+<tr>
+<td>カーソル位置から選択</td>
+<td>v</td>
+</tr>
+<tr>
+<td>カーソル位置から行選択</td>
+<td>V</td>
+</tr>
+<tr>
+<td>カーソル位置から矩形選択</td>
+<td>Ctrl+v</td>
+</tr>
+<tr>
+<td>直前の選択範囲を選択</td>
+<td>gv</td>
+</tr>
+<tr>
+<td><em>ビジュアルモード</em></td>
+<td></td>
+</tr>
+<tr>
+<td>選択範囲をカット</td>
+<td>d</td>
+</tr>
+<tr>
+<td>選択範囲をコピー</td>
+<td>y</td>
+</tr>
+<tr>
+<td>選択範囲の大文字・小文字を反転</td>
+<td>~</td>
+</tr>
+<tr>
+<td>選択範囲を大文字・小文字に変換</td>
+<td>U ↔ u</td>
+</tr>
+<tr>
+<td>選択行をインデント・逆インデント</td>
+<td>&raquo; ↔ &laquo;</td>
+</tr>
+<tr>
+<td><em>ビジュアルモード → インサートモード</em></td>
+<td></td>
+</tr>
+<tr>
+<td>選択範囲をカットして入力開始</td>
+<td>c</td>
+</tr>
+<tr>
+<td><em>インサートモード</em></td>
+<td></td>
+</tr>
+<tr>
+<td>レジスタ&quot;3の内容をペースト</td>
+<td>&ldquo;3p</td>
+</tr>
+<tr>
+<td>カーソル位置の上・下の行の文字をコピーして入力</td>
+<td>Ctrl+y ↔ Ctrl+e</td>
+</tr>
+<tr>
+<td>カーソル位置の行をインデント・逆インデント</td>
+<td>Ctrl+t ↔ Ctrl+d</td>
+</tr>
+<tr>
+<td>単語を順方向・逆方向に検索して補完</td>
+<td>Ctrl+n ↔ Ctrl+p</td>
+</tr>
+<tr>
+<td><em>コマンドモード</em></td>
+<td></td>
+</tr>
+<tr>
+<td>変更を保存して終了</td>
+<td>:x もしくは :wq もしくは ZZ</td>
+</tr>
+<tr>
+<td>変更を保存せずに終了</td>
+<td>:q! もしくは ZQ</td>
+</tr>
+<tr>
+<td>レジスタの内容を表示</td>
+<td>:di もしくは :reg</td>
+</tr>
+<tr>
+<td>カーソル位置から文字列fooを検索</td>
+<td>/foo</td>
+</tr>
+<tr>
+<td>カーソル位置の単語を検索</td>
+<td>*</td>
+</tr>
+<tr>
+<td>次の検索文字列・前の検索文字列に移動</td>
+<td>n ↔ N</td>
+</tr>
+<tr>
+<td>検索文字列のハイライトを解除</td>
+<td>:noh</td>
+</tr>
+<tr>
+<td>ファイル全体の文字列fooを文字列barに置換</td>
+<td>:%s/foo/bar/g</td>
+</tr>
+<tr>
+<td>ファイル全体の文字列fooを文字列barに確認しながら置換</td>
+<td>:%s/foo/bar/gc</td>
+</tr>
+<tr>
+<td>128行から256行の文字列fooを文字列barに置換</td>
+<td>:128,256s/foo/bar/g</td>
+</tr>
+<tr>
+<td>128行から256行の文字列fooを文字列barに確認しながら置換</td>
+<td>:128,256s/foo/bar/gc</td>
+</tr>
+<tr>
+<td>128行から256行をアルファベットに順にソート</td>
+<td>:128,256sort</td>
+</tr>
+<tr>
+<td>ファイルfooをバッファに追加</td>
+<td>:e foo</td>
+</tr>
+<tr>
+<td>バッファのファイルをリスト</td>
+<td>:ls</td>
+</tr>
+<tr>
+<td>バッファのファイルfooに切り替え</td>
+<td>:b foo</td>
+</tr>
+<tr>
+<td>バッファのファイルをすべて終了</td>
+<td>:qa</td>
+</tr>
+<tr>
+<td>カーソル位置にファイルfooを挿入</td>
+<td>:r foo</td>
+</tr>
+</tbody>
+</table>
+<p>vimの設定は~/.vimrcに記述します。以下の設定で使用するディレクトリ(~/temp)はあらかじめ作成しておいてください。:so ~/.vimrcというコマンドを実行すると~/.vimrcがリロードされます。soはsourceの略です。</p>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/.vimrc</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">set directory=$HOME/temp &#34;スワップファイル(*.swp)を~/tempに保存
+&#34;set noswapfile &#34;スワップファイルの機能を無効化
+set backupdir=$HOME/temp &#34;バックアップファイル(*~)を~/tempに保存
+&#34;set nobackup &#34;バックアップ機能を無効化
+set undodir=$HOME/temp &#34;アンドゥの履歴を~/tempに保存
+&#34;set noundofile &#34;アンドゥの履歴を保存する機能を無効化
+set number &#34;行番号を表示
+set laststatus=2 &#34;ステータスラインを表示
+set statusline=%F%m%h%w\ %&lt;\|ENC:%{&amp;fenc!=&#39;&#39;?&amp;fenc:&amp;enc}\|\FMT:%{&amp;ff}\|\TYPE:%Y\|\ %=\|CODE:0x%02B\|\POS:%l,%02v\|
+set whichwrap=b,s,&lt;,&gt;,[,] &#34;矢印キーによる行移動を拡張
+set background=dark &#34;暗い背景色を指定
+&#34;set background=light &#34;明るい背景色を指定
+syntax on &#34;シンタックスハイライトを有効化
+colorscheme murphy &#34;カラースキームを指定
+set scrolloff=999 &#34;カーソル位置の行を中央に表示
+set expandtab &#34;タブをタブ幅のスペースに置換
+set autoindent &#34;前の行のインデントを維持
+set tabstop=2 &#34;タブキーを押したときのタブ幅
+set shiftwidth=0 &#34;改行・タブコマンドを入力したときのタブ幅(0ならtabstopの値)
+set shiftround &#34;タブ幅の倍数になるように調整
+set hlsearch &#34;検索結果をハイライト
+set incsearch &#34;インクリメンタルサーチを有効化
+set clipboard+=unnamed &#34;OSのクリップボードとvimの無名レジスタを同期
+set hidden &#34;複数のバッファ(ファイル)を保持
+
+&#34;インサートモードでjjを入力するとノーマルモードへ移行
+inoremap &lt;silent&gt; jj &lt;ESC&gt;
+
+&#34;インデント後に選択範囲を再選択
+vnoremap &lt; &lt;gv
+vnoremap &gt; &gt;gv
+
+&#34;全角スペースを表示
+hi DoubleByteSpace term=underline ctermbg=blue guibg=darkgray
+match DoubleByteSpace /　/
+
+&#34;カーソル位置を復元
+if has(&#34;autocmd&#34;)
+au BufReadPost * if line(&#34;&#39;\&#34;&#34;) &gt; 1 &amp;&amp; line(&#34;&#39;\&#34;&#34;) &lt;= line(&#34;$&#34;) | exe &#34;normal! g`\&#34;&#34; | endif
+endif</code></pre></div></div>
+</figure>
+<p>vimのヘルプを日本語化するには次のようにします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S git
+# cd
+# git clone --depth 1 https://github.com/vim-jp/vimdoc-ja.git
+# echo &#39;set helplang=ja,en&#39; &gt;&gt;.vimrc
+# echo &#39;set runtimepath+=$HOME/vimdoc-ja&#39; &gt;&gt;.vimrc
+# vim</code></pre></div>
+<p>vimが起動したら下のコマンドを実行します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">:helptags ~/vimdoc-ja/doc</code></pre></div>
+<p>ヘルプを表示するには:hと入力します。:qと入力すれば終了します。</p>
+<figure class="center"><img src="vim_help.png"/>
+</figure>
+
+<p>テキストファイル~/fooをvimで開くには以下のように入力します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># vim ~/foo</code></pre></div>
+<p>以下のように入力すると読み出しモードで開くことができます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># vim -R ~/foo
+# view ~/foo</code></pre></div>
+<p>1から10の連番を入力するにはノーマルモードから i -&gt; 0 -&gt; Enter -&gt; 9. -&gt; ggVG -&gt; g -&gt; Ctrl+a のようにします。</p>
+<h2 id="メールクライアントmutt">メールクライアント(mutt)</h2>
+<p>メールクライアントには<a href="https://ja.wikipedia.org/wiki/Mutt">mutt</a>を使用することができます。詳細については<a href="https://wiki.archlinux.jp/index.php/Mutt">Mutt - ArchWiki</a>や<a href="https://www.emaillab.org/mutt/1.4/doc/manual_ja.html">The Mutt E-Mail Client</a>を参照してください。</p>
+<figure class="center"><img src="mutt.png"/>
+</figure>
+
+<p>muttをインストールします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S mutt</code></pre></div>
+<p>muttの設定を~/.muttrcに記述します。</p>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/.muttrc</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#75715e"># 受信(IMAP)の設定</span>
+set folder <span style="color:#f92672">=</span> imap<span style="color:#f92672">[</span>s<span style="color:#f92672">]</span>://imap.server.domain<span style="color:#f92672">[</span>:port<span style="color:#f92672">]</span>/<span style="color:#f92672">[</span>folder/<span style="color:#f92672">]</span> <span style="color:#75715e"># IMAPサーバのアドレス</span>
+set imap_user <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;USERNAME&#34;</span> <span style="color:#75715e"># ユーザ名</span>
+set imap_pass <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;PASSWORD&#34;</span> <span style="color:#75715e"># パスワード</span>
+set spoolfile <span style="color:#f92672">=</span> +INBOX <span style="color:#75715e"># 受信したメールを保存するメールボックス</span>
+mailboxes <span style="color:#f92672">=</span> +INBOX <span style="color:#75715e"># 新着メールをチェックするメールボックス</span>
+set postponed <span style="color:#f92672">=</span> +Drafts <span style="color:#75715e"># 下書きのメールを保存するメールボックス</span>
+set record <span style="color:#f92672">=</span> +Sent <span style="color:#75715e"># 送信済みのメールを保存するメールボックス</span>
+set header_cache <span style="color:#f92672">=</span> ~/.cache/mutt <span style="color:#75715e"># メッセージのヘッダを保存するディレクトリ</span>
+set message_cachedir <span style="color:#f92672">=</span> ~/.cache/mutt <span style="color:#75715e"># メッセージを保存するディレクトリ</span>
+unset imap_passive <span style="color:#75715e"># 新着メールをチェックする接続の許可</span>
+set imap_keepalive <span style="color:#f92672">=</span> <span style="color:#ae81ff">300</span> <span style="color:#75715e"># 接続を維持するポーリングの間隔(秒)</span>
+set mail_check <span style="color:#f92672">=</span> <span style="color:#ae81ff">120</span> <span style="color:#75715e"># 新着メールをチェックする間隔(秒)</span>
+
+<span style="color:#75715e"># 送信の設定</span>
+set realname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;YOUR_REAL_NAME&#34;</span> <span style="color:#75715e"># 名前</span>
+set from <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;YOUR_E-MAIL_ADDRESS&#34;</span> <span style="color:#75715e"># メールアドレス</span>
+set use_from <span style="color:#f92672">=</span> yes
+set my_user<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;USERNAME&#34;</span> <span style="color:#75715e"># ユーザ名</span>
+set my_pass<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;PASSWORD&#34;</span> <span style="color:#75715e"># パスワード</span>
+set smtp_url<span style="color:#f92672">=</span>smtp<span style="color:#f92672">[</span>s<span style="color:#f92672">]</span>://$my_user:$my_pass@smtp.server.domain<span style="color:#f92672">[</span>:port<span style="color:#f92672">]</span> <span style="color:#75715e"># SMTPサーバのアドレス</span>
+<span style="color:#75715e"># set ssl_force_tls = yes # SSL/TLS</span>
+<span style="color:#75715e"># set ssl_starttls = yes # STARTTLS</span>
+set editor<span style="color:#f92672">=</span>vim <span style="color:#75715e"># メッセージの編集に使用するエディタ(環境変数EDITORも使用可)</span></code></pre></div></div>
+</figure>
+<p>コマンドmuttを入力するとmuttが起動します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># mutt</code></pre></div>
+<p>メールサーバに接続すると受信したメールがリストされます。選択してSpaceを押すとメッセージが表示されます。</p>
+<p>メールボックスを変更するにはcを押します。続けてTabを押すとメールボックスがリストされます。選択してEnterを押すとメールボックスが変更されます。</p>
+<p>メールを作成するにはmを押します。宛先(To)と件名(Subject)を入力するとエディタが起動するのでメッセージを入力します。保存してyを押すとメールが送信されます。</p>
+<h2 id="ウェブブラウザw3m">ウェブブラウザ(w3m)</h2>
+<p>ウェブブラウザにはテキストブラウザの<a href="https://ja.wikipedia.org/wiki/W3m">w3m</a>を使用することができます。詳細については<a href="http://w3m.sourceforge.net/MANUAL.ja.html">w3m マニュアル</a>を参照してください。</p>
+<figure class="center"><img src="w3m.png"/>
+</figure>
+
+<p>w3mをインストールします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S w3m</code></pre></div>
+<p>URLを指定してコマンドw3mを入力するとw3mが起動しサイトが表示されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># w3m google.co.jp</code></pre></div>
+<p>基本的なキー操作はlessやvimに似ています。マウス操作にも対応しています。</p>
+<p>Hを押すとヘルプが表示されます。設定を変更したいならoを押します。qを押せば終了します。</p>
+<p>キーバインドを変更したい場合は~/.w3m/keymapを書き換えます。</p>
+<p>次のような関数を定義すればコマンドからウェブを検索することができます。</p>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/.bashrc</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#75715e"># ウェブを検索する</span>
+<span style="color:#66d9ef">function</span> sw <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">function</span> display_message <span style="color:#f92672">{</span>
+    echo <span style="color:#e6db74">&#39;DuckDuckGo:   sw &#34;検索語句&#34;&#39;</span> 1&gt;&amp;<span style="color:#ae81ff">2</span>
+    echo <span style="color:#e6db74">&#39;英辞郎:       sw e &#34;検索語句&#34;&#39;</span> 1&gt;&amp;<span style="color:#ae81ff">2</span>
+    echo <span style="color:#e6db74">&#39;goo国語辞書:  sw g &#34;検索語句&#34;&#39;</span> 1&gt;&amp;<span style="color:#ae81ff">2</span>
+    echo <span style="color:#e6db74">&#39;e-Words:      sw ew &#34;検索語句&#34;&#39;</span> 1&gt;&amp;<span style="color:#ae81ff">2</span>
+    echo <span style="color:#e6db74">&#39;Wikipedia:    sw w &#34;検索語句&#34;&#39;</span> 1&gt;&amp;<span style="color:#ae81ff">2</span>
+  <span style="color:#f92672">}</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# -eq <span style="color:#ae81ff">1</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    s<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $1 | sed <span style="color:#e6db74">&#39;s/ /+/g&#39;</span><span style="color:#e6db74">`</span>
+    w3m https://start.duckduckgo.com/?q<span style="color:#f92672">=</span>$s<span style="color:#ae81ff">\&amp;</span>kl<span style="color:#f92672">=</span>jp-jp<span style="color:#ae81ff">\&amp;</span>kp<span style="color:#f92672">=</span>-2<span style="color:#ae81ff">\&amp;</span>kh<span style="color:#f92672">=</span>1<span style="color:#ae81ff">\&amp;</span>k1<span style="color:#f92672">=</span>-1
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[</span> $# -ne <span style="color:#ae81ff">2</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+    display_message
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">fi</span>
+  <span style="color:#66d9ef">case</span> $1 in
+  e <span style="color:#f92672">)</span>
+    s<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $2 | sed <span style="color:#e6db74">&#39;s/ /+/g&#39;</span><span style="color:#e6db74">`</span>
+    w3m https://eow.alc.co.jp/search?q<span style="color:#f92672">=</span>$s
+    ;;
+  g <span style="color:#f92672">)</span>
+    s<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $2 | sed <span style="color:#e6db74">&#39;s/ /+/g&#39;</span><span style="color:#e6db74">`</span>
+    w3m https://dictionary.goo.ne.jp/srch/jn/$s/m0u/
+    ;;
+  ew <span style="color:#f92672">)</span>
+    s<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $2 | sed <span style="color:#e6db74">&#39;s/ /_/g&#39;</span><span style="color:#e6db74">`</span>
+    w3m http://e-words.jp/w/$s
+    ;;
+  w <span style="color:#f92672">)</span>
+    s<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>echo $2 | sed <span style="color:#e6db74">&#39;s/ /_/g&#39;</span><span style="color:#e6db74">`</span>
+    w3m https://ja.wikipedia.org/wiki/$s
+    ;;
+  * <span style="color:#f92672">)</span>
+    display_message
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    ;;
+  <span style="color:#66d9ef">esac</span>
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+<span style="color:#f92672">}</span></code></pre></div></div>
+</figure>
+<h2 id="ダウンロードマネージャcurl-wget-aria2">ダウンロードマネージャ(curl, wget, aria2)</h2>
+<p>ダウンロードマネージャには<a href="https://ja.wikipedia.org/wiki/CURL">curl</a>/<a href="https://ja.wikipedia.org/wiki/GNU_Wget">wget</a>/<a href="https://ja.wikipedia.org/wiki/Aria2">aria2</a>などを使用することができます。ここではwgetを紹介します。</p>
+<p>wgetをインストールします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S wget</code></pre></div>
+<p>ファイルをダウンロードするにはファイルのURLを指定してコマンドwgetを入力します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># wget http://www.example.com/path/to/file</code></pre></div>
+<p>ウェブサイトをダウンロードするには以下のオプションと共にウェブサイトのURLを指定してコマンドを入力します。毎回オプションを指定するのは面倒なのでエイリアスを設定しておくと便利です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># wget -m -p -E -k -np http://www.example.com/</code></pre></div>
+<h2 id="ftpクライアントlftp">FTPクライアント(lftp)</h2>
+<p>FTPクライアントには<a href="https://ja.wikipedia.org/wiki/Lftp">lftp</a>を使用することができます。</p>
+<p>lftpをインストールします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S lftp</code></pre></div>
+<p>コマンドlftpを入力するとlftpのシェルが起動して以下のようなプロンプトが表示されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># lftp
+lftp :~&gt;</code></pre></div>
+<p>FTPサーバのアカウントにログインするには続けて次のように入力します。USERNAMEは自分のアカウントのユーザ名に置き換えてください。HOSTNAMEは接続するFTPサーバのホスト名に置き換えてください。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">lftp :~&gt; open -u USERNAME HOSTNAME</code></pre></div>
+<p>続けてアカウントのパスワードを要求されます。正しいパスワードを入力するとログインに成功します。</p>
+<p>FTPサーバにログインしたらlftpのコマンドを使用してサーバにファイルをアップロードしたりサーバからファイルをダウンロードしたりすることができます。lftpの基本的なコマンドには以下のようなものがあります。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cd</td>
+<td>サーバのディレクトリを変更</td>
+</tr>
+<tr>
+<td>lcd</td>
+<td>クライアントのディレクトリを変更</td>
+</tr>
+<tr>
+<td>put</td>
+<td>クライアントのファイルをアップロード</td>
+</tr>
+<tr>
+<td>get</td>
+<td>サーバのファイルをダウンロード</td>
+</tr>
+<tr>
+<td>mput</td>
+<td>クライアントの複数ファイルをアップロード</td>
+</tr>
+<tr>
+<td>mget</td>
+<td>サーバの複数ファイルをダウンロード</td>
+</tr>
+<tr>
+<td>rm</td>
+<td>サーバのファイルを削除</td>
+</tr>
+<tr>
+<td>help</td>
+<td>コマンドリスト・コマンドのヘルプを表示</td>
+</tr>
+</tbody>
+</table>
+<p>lftpを終了するにはコマンドbye/exit/quitなどを入力します。</p>
+<p>スクリプト(lftpで実行する一連のコマンドを記述したテキストファイル)を使用してクライアントからサーバにディレクトリの内容をミラーリングアップロードする方法を以下に紹介します。</p>
+<p>あらかじめスクリプト~/fooを作成しておきます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># vim ~/foo</code></pre></div>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/foo</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash"><span style="color:#75715e"># FTPサーバのアカウントにログインします。</span>
+<span style="color:#75715e"># ユーザ名(USERNAME)・パスワード(PASSWORD)・ホスト名(HOSTNAME)を自分のものに置き換えてください。</span>
+open -u USERNAME,PASSWORD HOSTNAME
+
+<span style="color:#75715e"># クライアントからサーバにミラーリングアップロードします。</span>
+<span style="color:#75715e"># mirror --reverse -R -n -e -p -v /local/path/to/dir /remote/path/to/dir</span>
+
+<span style="color:#75715e"># 最初に以下のコマンドを実行して正しく処理されることを確認してください。</span>
+<span style="color:#75715e"># オプション&#34;--dry-run&#34;を外すと実際に処理されます。</span>
+mirror --reverse -R -n -e -p -v --dry-run /local/path/to/dir /remote/path/to/dir
+
+<span style="color:#75715e"># ログアウトします。</span>
+close</code></pre></div></div>
+</figure>
+<p>スクリプト~/fooを指定してコマンドlftpを入力します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># lftp -v -f ~/foo</code></pre></div>
+<h2 id="javascriptシェルv8">JavaScriptシェル(V8)</h2>
+<p>JavaScriptのプログラムを実行するには<a href="https://ja.wikipedia.org/wiki/V8_(JavaScript%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3)">V8</a>を使用します。</p>
+<p>V8をインストールします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S mingw-w64-i686-v8
+# pacman -S mingw-w64-x86_64-v8</code></pre></div>
+<p>JavaScriptのコードを記述したファイル~/foo.jsを作成します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># vim ~/foo.js</code></pre></div>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">~/foo.js</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JavaScript" data-lang="JavaScript"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+<span style="color:#a6e22e">print</span>( <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span> ); <span style="color:#75715e">// 5 (出力にはprint関数を使用します)
+</span></code></pre></div></div>
+</figure>
+<p>~/foo.jsを指定してコマンドd8を入力します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># d8 ~/foo.js</code></pre></div>
+<h2 id="電卓bc">電卓(bc)</h2>
+<p>電卓には<a href="https://ja.wikipedia.org/wiki/Bc_(UNIX)">bc</a>を使用することができます。詳細については<a href="http://x68000.q-e-d.net/~68user/unix/pickup?bc">bcコマンドの使い方: UNIX/Linuxの部屋</a>を参照してください。</p>
+<p>bcをインストールします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># pacman -S bc</code></pre></div>
+<p>コマンドbcを入力するとbcが起動します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># bc
+bc 1.07.1
+Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006, 2008, 2012-2017 Free Software Foundation, Inc.
+This is free software with ABSOLUTELY NO WARRANTY.
+For details type `warranty&#39;. </code></pre></div>
+<p>続けて数式を入力すると計算結果が表示されます。終了するにはquitと入力します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">2+3
+5
+quit</code></pre></div>
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>

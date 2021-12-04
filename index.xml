@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WindowsでUnix</title>
+    <link>https://foo02.github.io/</link>
+    <description>Recent content on WindowsでUnix</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja-jp</language><atom:link href="https://foo02.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MiniView</title>
+      <link>https://foo02.github.io/miniview.html</link>
+      <pubDate>Wed, 01 Dec 2021 14:16:56 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/miniview.html</guid>
+      <description>はじめに MiniViewはシンプルなテキストビューア兼イメージビューアです。 スクリーンショット ダウンロード 以下のアーカイブはご自身の環境(3</description>
+    </item>
+    
+    <item>
+      <title>メールフォーム</title>
+      <link>https://foo02.github.io/mail_form.html</link>
+      <pubDate>Fri, 03 Jan 2020 12:44:17 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/mail_form.html</guid>
+      <description>&amp;lt;!-ninja_style_mailform-&amp;gt; &amp;lt;!-ninja_style_mailform-&amp;gt;</description>
+    </item>
+    
+    <item>
+      <title>TeXと文書作成</title>
+      <link>https://foo02.github.io/tex.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:14 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/tex.html</guid>
+      <description>はじめに TeX(テフもしくはテック)は高度な組版作業を自動化します。このサイトの記事をTeXで処理するとこのようになります。TeXを利用すれ</description>
+    </item>
+    
+    <item>
+      <title>Windowsのカスタマイズ</title>
+      <link>https://foo02.github.io/windows.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:14 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/windows.html</guid>
+      <description>はじめに Windowsを使い始める前にやっておくべきことを紹介します。 パーティションの分割 WindowsはCドライブにインストールされます。</description>
+    </item>
+    
+    <item>
+      <title>XMPlayのスキン</title>
+      <link>https://foo02.github.io/skin_xmplay.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:14 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/skin_xmplay.html</guid>
+      <description>はじめに ここには管理人が自作したXMPlayのスキンが置いてあります。ご自由にお使いください。 スクリーンショット ダウンロード skin_xmplay.zip</description>
+    </item>
+    
+    <item>
+      <title>お気に入りのサイト</title>
+      <link>https://foo02.github.io/my_websites.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:14 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/my_websites.html</guid>
+      <description>ウェブ検索: DuckDuckGo 英和辞典: 英辞郎 / Weblio辞書 国語辞典: goo辞書 百科事典: Wikipedia IT用語辞典: e-Words 商品検索: Amazon フリーソフト: 窓の杜 / OSDN / ｋ本的</description>
+    </item>
+    
+    <item>
+      <title>Linuxのインストール</title>
+      <link>https://foo02.github.io/install_linux.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:13 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/install_linux.html</guid>
+      <description>はじめに Arch LinuxをVirtualBoxにインストールします。インストールするパッケージについてはArchWikiを参照してください。Vi</description>
+    </item>
+    
+    <item>
+      <title>UnixとWindowsの違い</title>
+      <link>https://foo02.github.io/unix_windows.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:13 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/unix_windows.html</guid>
+      <description>はじめに パソコンを使用するには最初にOSというソフトをインストールする必要があります。市販のパソコンにはWindowsというOSが付属してい</description>
+    </item>
+    
+    <item>
+      <title>Unixの基本操作</title>
+      <link>https://foo02.github.io/unix.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:13 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/unix.html</guid>
+      <description>はじめに MSYS2を使用してUnixの基本操作を説明します。MSYS2はWindowsで動作するコンパクトなUnix環境です。Unixについ</description>
+    </item>
+    
+    <item>
+      <title>ワイルドカードと正規表現</title>
+      <link>https://foo02.github.io/wc_re.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:13 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/wc_re.html</guid>
+      <description>はじめに ワイルドカードおよび正規表現は文字列のパターンを指定する方法です。1パターンに文字列が一致することをマッチするといい、パターンを指定</description>
+    </item>
+    
+    <item>
+      <title>お気に入りのソフト</title>
+      <link>https://foo02.github.io/my_software.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:12 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/my_software.html</guid>
+      <description>カテゴリ ソフト名 用途 FTPクライアント lftp ファイルのアップロード PDFビューア Sumatra PDF PDFファイルの閲覧 アンインストーラ Geek Uninstaller アプリケーションの完</description>
+    </item>
+    
+    <item>
+      <title>サクラエディタのマクロ</title>
+      <link>https://foo02.github.io/sakura_macros.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:12 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/sakura_macros.html</guid>
+      <description>はじめに ここには管理人が自作したサクラエディタのマクロ(*.ppa)が置いてあります。ご自由にお使いください。 選択文字列を挟み込むPPAマク</description>
+    </item>
+    
+    <item>
+      <title>レジストリのバックアップ</title>
+      <link>https://foo02.github.io/backup_reg.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:12 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/backup_reg.html</guid>
+      <description>はじめに レジストリをバックアップする方法を紹介します。 レジストリ全体のバックアップ レジストリ全体をバックアップするには復元ポイントを作成しま</description>
+    </item>
+    
+    <item>
+      <title>情報セキュリティ</title>
+      <link>https://foo02.github.io/security.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:12 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/security.html</guid>
+      <description>はじめに PCの安全性と機密性を高めるための方策を列挙します。 システムのセキュリティ ユーザアカウントにパスワードを設定する。 自動再生機能を無効</description>
+    </item>
+    
+    <item>
+      <title>PC環境</title>
+      <link>https://foo02.github.io/pc_env.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:11 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/pc_env.html</guid>
+      <description>はじめに ここではPCを選択する際に知っておくべきことを紹介します。 PCの選択 PCの選択基準は主にCPU・メモリ・ストレージの3つです。 CPU CP</description>
+    </item>
+    
+    <item>
+      <title>Qonohaのスキン</title>
+      <link>https://foo02.github.io/skin_qonoha.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:11 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/skin_qonoha.html</guid>
+      <description>はじめに ここには管理人が自作したQonohaのスキンが置いてあります。ご自由にお使いください。 スクリーンショット ダウンロード skin_qonoha.zip</description>
+    </item>
+    
+    <item>
+      <title>Windowsプログラミング</title>
+      <link>https://foo02.github.io/programming.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:11 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/programming.html</guid>
+      <description>はじめに MSYS2という開発環境を使用してWindowsアプリケーションを作成する方法を紹介します。MSYS2についてはUnixの基本操作を</description>
+    </item>
+    
+    <item>
+      <title>かな入力のカスタマイズ</title>
+      <link>https://foo02.github.io/kana_input.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:10 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/kana_input.html</guid>
+      <description>はじめに かなの配列・入力方式の1つ月配列を紹介します。 月配列の特長 月配列には次のような特長があります。 かな入力時にホームポジションからほとん</description>
+    </item>
+    
+    <item>
+      <title>ローカルウィキ</title>
+      <link>https://foo02.github.io/local_wiki.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:10 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/local_wiki.html</guid>
+      <description>はじめに ウィキとはウェブブラウザからウェブサイトのページを作成・編集できる仕組みです。HTMLよりもシンプルなマークアップ言語を使用して誰で</description>
+    </item>
+    
+    <item>
+      <title>ネットラジオ</title>
+      <link>https://foo02.github.io/internet_radio.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:09 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/internet_radio.html</guid>
+      <description>はじめに ネットラジオについて紹介します。 ネットラジオ ネットラジオとはネットで配信されている音声コンテンツです。世界中の音楽をいつでも聴くこと</description>
+    </item>
+    
+    <item>
+      <title>ファイルとアプリケーション</title>
+      <link>https://foo02.github.io/file_app.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:09 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/file_app.html</guid>
+      <description>はじめに よく使用するファイルの種類・ファイルフォーマットおよびそれらのファイルを扱うアプリケーションについて説明します。 テキストファイルの種</description>
+    </item>
+    
+    <item>
+      <title>フォントとアイコン</title>
+      <link>https://foo02.github.io/font_icon.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:09 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/font_icon.html</guid>
+      <description>はじめに アプリケーションで利用できるフォントとアイコンを紹介します。 フォント フォントには文字間隔が調整されるプロポーショナルフォントと文字幅</description>
+    </item>
+    
+    <item>
+      <title>DSPのカスタマイズ</title>
+      <link>https://foo02.github.io/dsp.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:08 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/dsp.html</guid>
+      <description>はじめに オーディオプレーヤのDSP(再生音をフィルタリングする機能)について説明します。 DSPの機能 主なDSPとしてイコライザ・コンプレッサ</description>
+    </item>
+    
+    <item>
+      <title>ファイルのバックアップ</title>
+      <link>https://foo02.github.io/backup_file.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:08 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/backup_file.html</guid>
+      <description>はじめに ファイルをバックアップする方法を紹介します。 バックアップの準備 ハードディスク・SSDの構成 ここでは以下のようなハードディスク・SSD</description>
+    </item>
+    
+    <item>
+      <title>英語学習</title>
+      <link>https://foo02.github.io/english.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:08 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/english.html</guid>
+      <description>はじめに 英語をマスターするには訓練を重ねることによってネイティブに近い発音と言語感覚を身につける必要があります。しかし、日本語と英語の間には</description>
+    </item>
+    
+    <item>
+      <title>お気に入りの本</title>
+      <link>https://foo02.github.io/my_books.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:07 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/my_books.html</guid>
+      <description>辞書 現代国語例解辞典 アンカーコズミカ英和辞典 アドバンストフェイバリット和英辞典 ロングマン現代英英辞典 オックスフォード現代英英辞典 英文法 英文法</description>
+    </item>
+    
+    <item>
+      <title>オーディオファイルの取り扱い</title>
+      <link>https://foo02.github.io/audio_file.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:07 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/audio_file.html</guid>
+      <description>はじめに foobar2000でオーディオファイルを取り扱う方法を紹介します。 オーディオファイルのノーマライズ オーディオファイルの音量を均一化</description>
+    </item>
+    
+    <item>
+      <title>コーディングスタイル</title>
+      <link>https://foo02.github.io/coding.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:07 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/coding.html</guid>
+      <description>はじめに プログラミングにおいて読みやすく間違いに気づきやすいコードを記述するための工夫がコーディングスタイルです。以下に示すようなスタイルに</description>
+    </item>
+    
+    <item>
+      <title>このサイトについて</title>
+      <link>https://foo02.github.io/about.html</link>
+      <pubDate>Thu, 02 Jan 2020 11:12:06 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/about.html</guid>
+      <description>はじめに ウェブに散らばっている断片的な情報を自分のために分かりやすくまとめているウェブサイトです。記事の内容は加筆や修正によって変わることが</description>
+    </item>
+    
+  </channel>
+</rss>

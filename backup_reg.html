@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>レジストリのバックアップ</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>レジストリのバックアップ</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#レジストリ全体のバックアップ">レジストリ全体のバックアップ</a></li>
+    <li><a href="#レジストリキーのバックアップ">レジストリキーのバックアップ</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p>レジストリをバックアップする方法を紹介します。</p>
+<h2 id="レジストリ全体のバックアップ">レジストリ全体のバックアップ</h2>
+<p>レジストリ全体をバックアップするには<em>復元ポイント</em>を作成します。復元ポイントの作成については<a href="http://windows.microsoft.com/ja-JP/windows7/Create-a-restore-point">復元ポイントを作成する</a>を参照してください。復元ポイントの作成によってバックアップしたレジストリを復元するにはシステムの復元を実行します。システムの復元については<a href="http://windows.microsoft.com/ja-JP/windows7/products/features/system-restore">システムの復元</a>を参照してください。</p>
+<h2 id="レジストリキーのバックアップ">レジストリキーのバックアップ</h2>
+<p>特定のレジストリキーをバックアップするには<em>レジストリエディタ</em>を使用します。詳細については<a href="http://windows.microsoft.com/ja-JP/windows7/Back-up-the-registry">レジストリをバックアップする</a>を参照してください。</p>
+<p>ここではバッチファイルを使用して一度に複数のレジストリキーをバックアップする方法を紹介します。テキストエディタで次のようなバッチファイル(拡張子が*.batのテキストファイル)を作成してください。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">@echo off
+
+:: レジストリのバックアップ
+
+:: 最初にバックアップ先のフォルダを指定します。
+
+:: 次のコマンドでバックアップ先のフォルダに移動します。
+:: cd /d &#34;バックアップ先のフォルダのパス&#34;
+
+cd /d &#34;D:\RegFiles&#34;
+
+:: 以下でレジストリキーをバックアップします。
+
+:: 次のコマンドでレジストリキーをエクスポートします。
+:: reg export &#34;エクスポートするキーのパス&#34; &#34;レジストリファイル(*.reg)の名前&#34; /y
+:: - キーのパスはレジストリエディタからコピーします。
+:: - 複数のキーをバックアップする場合は複数行にわたって記述します。
+
+reg export &#34;HKEY_CURRENT_USER\Console&#34; &#34;Console.reg&#34; /y
+reg export &#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit&#34; &#34;Regedit.reg&#34; /y</code></pre></div>
+<p>このバッチファイルを実行するとバックアップ先のフォルダにレジストリファイル(*.reg)が作成されます。このレジストリファイルを実行するとバックアップしたレジストリを復元することができます。</p>
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>
