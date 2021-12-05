@@ -406,11 +406,11 @@ CFLAGS <span style="color:#f92672">=</span> -fexec-charset<span style="color:#f9
 
 <span style="color:#75715e"># オブジェクトファイルから実行ファイルを作成
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">$(TARGET)</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>OBJS<span style="color:#66d9ef">)</span>
-	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> -o $@ <span style="color:#66d9ef">$(</span>OBJS<span style="color:#66d9ef">)</span>
+	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> -o $@ $^
 
 <span style="color:#75715e"># ソースファイルからオブジェクトファイルを作成
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span> %.c
-	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> -o $@ -c <span style="color:#66d9ef">$(</span>CFLAGS<span style="color:#66d9ef">)</span> $&lt;
+	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> -o $@ <span style="color:#66d9ef">$(</span>CFLAGS<span style="color:#66d9ef">)</span> -c $&lt;
 
 <span style="color:#75715e"># リソースファイルからオブジェクトファイルを作成
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span> %.rc
