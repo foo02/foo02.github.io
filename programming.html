@@ -395,11 +395,13 @@
 <figure class="xCodeBlock">
 <figcaption class="xCodeBlock_title">Makefile</figcaption>
 <div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Base Makefile" data-lang="Base Makefile">TARGET <span style="color:#f92672">=</span> window.exe <span style="color:#75715e"># 生成される実行ファイル</span>
-SRCS <span style="color:#f92672">=</span> window.c <span style="color:#75715e"># コンパイルするソースファイル</span>
-OBJS <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>SRCS:.c<span style="color:#f92672">=</span>.o<span style="color:#66d9ef">)</span> resource.o <span style="color:#75715e"># コンパイルするオブジェクトファイル</span>
+SRCS <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>notdir <span style="color:#66d9ef">$(</span>shell find ./ -name <span style="color:#e6db74">&#39;*.c&#39;</span><span style="color:#66d9ef">))</span> <span style="color:#75715e"># コンパイルするソースファイル(*.c)</span>
+OBJS <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>SRCS:.c<span style="color:#f92672">=</span>.o<span style="color:#66d9ef">)</span> resource.o <span style="color:#75715e"># コンパイルするオブジェクトファイル(*.o)</span>
 CC <span style="color:#f92672">=</span> gcc <span style="color:#75715e"># 使用するコンパイラ</span>
-CFLAGS <span style="color:#f92672">=</span> -fexec-charset<span style="color:#f92672">=</span>cp932 <span style="color:#75715e"># コンパイラのオプション</span>
-
+CFLAGS <span style="color:#f92672">=</span> <span style="color:#ae81ff">\ </span><span style="color:#75715e"># コンパイラのオプション</span>
+  -s -O2 -Wall -fexec-charset<span style="color:#f92672">=</span>cp932 <span style="color:#75715e"># リリース用</span>
+<span style="color:#75715e">#  -g -O0 -Wall -fexec-charset=cp932 # デバッグ用
+</span><span style="color:#75715e"></span>
 <span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> all clean
 
 <span style="color:#a6e22e">all</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>TARGET<span style="color:#66d9ef">)</span>
