@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miniplay</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>Miniplay</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#スクリーンショット">スクリーンショット</a></li>
+    <li><a href="#ダウンロード">ダウンロード</a></li>
+    <li><a href="#動作環境">動作環境</a></li>
+    <li><a href="#インストール">インストール</a></li>
+    <li><a href="#アンインストール">アンインストール</a></li>
+    <li><a href="#ファイル構成">ファイル構成</a></li>
+    <li><a href="#ウィンドウ構成">ウィンドウ構成</a></li>
+    <li><a href="#メニュー">メニュー</a>
+      <ul>
+        <li><a href="#ファイル">ファイル</a></li>
+        <li><a href="#表示">表示</a></li>
+        <li><a href="#再生">再生</a></li>
+        <li><a href="#ヘルプ">ヘルプ</a></li>
+      </ul>
+    </li>
+    <li><a href="#開発環境">開発環境</a></li>
+    <li><a href="#免責事項">免責事項</a></li>
+    <li><a href="#既知の不具合">既知の不具合</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p>MiniPlayはシンプルなメディアプレーヤです。</p>
+<h2 id="スクリーンショット">スクリーンショット</h2>
+<figure class="center"><img src="miniplay.png"/>
+</figure>
+
+<h2 id="ダウンロード">ダウンロード</h2>
+<p>以下のアーカイブはご自身の環境(32bitもしくは64bit)に合ったものを選択してください。</p>
+<p><a href="./miniplay32.zip">miniplay32.zip</a> (32bit版)<br>
+<a href="./miniplay64.zip">miniplay64.zip</a> (64bit版)<br>
+<a href="./miniplay.zip">miniplay.zip</a> (ソースコード)</p>
+<h2 id="動作環境">動作環境</h2>
+<p>Windows7で動作確認しています。</p>
+<h2 id="インストール">インストール</h2>
+<p>ダウンロードしたアーカイブを展開するとフォルダMiniPlayが作成されます。このフォルダを適当な場所に置けばインストール完了です。フォルダ内のminiplay.exeを実行するとMiniPlayが起動します。インストールが終了したらアーカイブは削除しても構いません。アップデートする場合は同名のファイルを上書きしてください。</p>
+<h2 id="アンインストール">アンインストール</h2>
+<p>上記のフォルダを削除すればアンインストールされます。</p>
+<h2 id="ファイル構成">ファイル構成</h2>
+<p>以下のファイルで構成されています。ライブラリファイル(*.dll)は実行ファイル(*.exe)と同じ場所に置いてください。</p>
+<ul>
+<li>miniplay.exe (アプリケーションのプログラム)</li>
+<li>*.dll (アプリケーションの実行に必要なライブラリ)</li>
+<li>readme.md (最初にお読みください)</li>
+</ul>
+<p>アプリケーション実行後に以下のファイルが同じ場所に作成されます。</p>
+<ul>
+<li>miniplay.ini (アプリケーションの設定)</li>
+<li>miniplay.log (アプリケーションのログ)</li>
+</ul>
+<h2 id="ウィンドウ構成">ウィンドウ構成</h2>
+<p>メインウィンドウの左のペインに映像が表示されます。右上のツリーからフォルダを選択します。フォルダの内容が右下のリストに表示されます。リストのファイルを選択すると再生されます。ロードしたファイルはツールバーで操作できます。</p>
+<h2 id="メニュー">メニュー</h2>
+<h3 id="ファイル">ファイル</h3>
+<ul>
+<li>開く<br>
+開くファイルを選択します。</li>
+<li>終了<br>
+アプリケーションを終了します。</li>
+</ul>
+<h3 id="表示">表示</h3>
+<ul>
+<li>フルスクリーン<br>
+映像をスクリーン全体に表示します。</li>
+<li>フルクライアント<br>
+映像をクライアントエリア全体に表示します。</li>
+<li>手前に表示<br>
+ウィンドウを常に手前に表示します。</li>
+</ul>
+<h3 id="再生">再生</h3>
+<ul>
+<li>再生/一時停止<br>
+ファイルを再生/一時停止します。</li>
+<li>停止<br>
+ファイルを停止します。</li>
+<li>消音<br>
+音量の有効・無効を切り替えます。</li>
+<li>前へ<br>
+リスト順で前のファイルを再生します。</li>
+<li>次へ<br>
+リスト順で次のファイルを再生します。</li>
+</ul>
+<h3 id="ヘルプ">ヘルプ</h3>
+<ul>
+<li>バージョン情報<br>
+MiniPlayのバージョン情報を表示します。</li>
+</ul>
+<h2 id="開発環境">開発環境</h2>
+<ul>
+<li>OS: Windows 7 Home Premium 64-bit SP1</li>
+<li>ツールチェーン: MinGW(Mingw-w64)</li>
+<li>GUIツールキット: wxWidgets/wxMSW 3.1.5</li>
+<li>GUIビルダ: wxFormBuilder 3.10.1</li>
+</ul>
+<p>wxWidgetsがインストールされているMSYS2でソースファイルをビルドすることができます。</p>
+<h2 id="免責事項">免責事項</h2>
+<p>このソフトウェアの使用によって損害や不利益が生じても作者は責任を負いません。</p>
+<h2 id="既知の不具合">既知の不具合</h2>
+<ul>
+<li>WMVの再生がかなり不安定です。再生の開始直後に落ちることもあります。</li>
+</ul>
+<p>ソースコードに間違いがあれば指摘してください。</p>
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>
