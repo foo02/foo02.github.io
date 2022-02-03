@@ -2,20 +2,22 @@
 <html><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miniplay 20220203</title>
+<title>Miniplay 220203</title>
 <link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
 <link rel="stylesheet" href="https://foo02.github.io/style.css" />
 <link rel="icon" href="/favicon.png" />
 </head><body><header>
 <div id="date"></div>
 <div><a href="https://foo02.github.io/">トップページ</a></div>
-<h1>Miniplay 20220203</h1>
+<h1>Miniplay 220203</h1>
 <nav id="TableOfContents">
   <ul>
     <li><a href="#はじめに">はじめに</a></li>
     <li><a href="#スクリーンショット">スクリーンショット</a></li>
-    <li><a href="#ダウンロード">ダウンロード</a></li>
     <li><a href="#動作環境">動作環境</a></li>
+    <li><a href="#開発環境">開発環境</a></li>
+    <li><a href="#免責事項">免責事項</a></li>
+    <li><a href="#ダウンロード">ダウンロード</a></li>
     <li><a href="#インストール">インストール</a></li>
     <li><a href="#アンインストール">アンインストール</a></li>
     <li><a href="#ファイル構成">ファイル構成</a></li>
@@ -28,8 +30,6 @@
         <li><a href="#ヘルプ">ヘルプ</a></li>
       </ul>
     </li>
-    <li><a href="#開発環境">開発環境</a></li>
-    <li><a href="#免責事項">免責事項</a></li>
     <li><a href="#注意事項">注意事項</a></li>
   </ul>
 </nav>
@@ -40,13 +40,23 @@
 <figure class="center"><img src="miniplay.png"/>
 </figure>
 
+<h2 id="動作環境">動作環境</h2>
+<p>Windows7で動作確認しています。</p>
+<h2 id="開発環境">開発環境</h2>
+<p>このソフトウェアは以下のソフトウェアを使用して作成しました。</p>
+<ul>
+<li>OS: Windows 7 Home Premium 64-bit SP1</li>
+<li>ツールチェーン: MinGW(Mingw-w64)</li>
+<li>GUIツールキット: wxWidgets/wxMSW 3.1.5</li>
+<li>GUIビルダ: wxFormBuilder 3.10.1</li>
+</ul>
+<h2 id="免責事項">免責事項</h2>
+<p>このソフトウェアの使用によって損害や不利益が生じても作者は責任を負いません。</p>
 <h2 id="ダウンロード">ダウンロード</h2>
 <p>以下のアーカイブはご自身の環境(32bitもしくは64bit)に合ったものを選択してください。</p>
 <p><a href="./miniplay32.zip">miniplay32.zip</a> (32bit版)<br>
 <a href="./miniplay64.zip">miniplay64.zip</a> (64bit版)<br>
 <a href="./miniplay.zip">miniplay.zip</a> (ソースコード)</p>
-<h2 id="動作環境">動作環境</h2>
-<p>Windows7で動作確認しています。</p>
 <h2 id="インストール">インストール</h2>
 <p>ダウンロードしたアーカイブを展開するとフォルダMiniPlayが作成されます。このフォルダを適当な場所に置けばインストール完了です。フォルダ内のminiplay.exeを実行するとMiniPlayが起動します。インストールが終了したらアーカイブは削除しても構いません。アップデートする場合は同名のファイルを上書きしてください。</p>
 <h2 id="アンインストール">アンインストール</h2>
@@ -103,18 +113,8 @@
 <li>バージョン情報<br>
 MiniPlayのバージョン情報を表示します。</li>
 </ul>
-<h2 id="開発環境">開発環境</h2>
-<p>このソフトウェアは以下のソフトウェアを使用して作成しました。</p>
-<ul>
-<li>OS: Windows 7 Home Premium 64-bit SP1</li>
-<li>ツールチェーン: MinGW(Mingw-w64)</li>
-<li>GUIツールキット: wxWidgets/wxMSW 3.1.5</li>
-<li>GUIビルダ: wxFormBuilder 3.10.1</li>
-</ul>
-<h2 id="免責事項">免責事項</h2>
-<p>このソフトウェアの使用によって損害や不利益が生じても作者は責任を負いません。</p>
 <h2 id="注意事項">注意事項</h2>
-<p>正常に再生できないメディアファイルは拡張子を*.videoに変更してみてください。このようにするとMedia Foundationが無効になりDirectShowが有効になります。</p>
+<p>正常に再生できないメディアファイルは拡張子を*.videoに変更してみてください。Media FoundationではなくDirectShowで再生されるようになります。</p>
 
 
     </div><footer>
