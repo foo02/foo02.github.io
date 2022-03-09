@@ -58,31 +58,43 @@
 </thead>
 <tbody>
 <tr>
-<td>AppData</td>
-<td>プロファイルフォルダに保存された設定ファイル (*.ini, *.xml など)</td>
-</tr>
-<tr>
-<td>Program Files</td>
-<td>デフォルトのインストールフォルダに保存された設定ファイル<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></td>
-</tr>
-<tr>
 <td>Applications</td>
 <td>ポータブルアプリケーションそれぞれのインストールフォルダ</td>
 </tr>
 <tr>
 <td>Commons</td>
-<td>複数のアプリケーションが共用するプログラム・ライブラリ (*.dll)<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></td>
+<td>複数のアプリケーションが共用するプログラム・ライブラリ (*.dll)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></td>
 </tr>
 <tr>
-<td>Downloads</td>
-<td>Windowsのデフォルトのダウンロード先</td>
+<td>AppData</td>
+<td>プロファイルフォルダに保存された設定ファイル (*.ini, *.xml など)</td>
+</tr>
+<tr>
+<td>Program Files</td>
+<td>デフォルトのインストールフォルダに保存された設定ファイル<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></td>
+</tr>
+<tr>
+<td>Archives</td>
+<td>アーカイブファイル (*.7zip, *.zip など)</td>
+</tr>
+<tr>
+<td>ISOs</td>
+<td>CD/DVDなどのイメージファイル (*.iso)</td>
+</tr>
+<tr>
+<td>RegFiles</td>
+<td>レジストリからエクスポートしたデータ (*.reg)</td>
 </tr>
 <tr>
 <td>Shortcuts</td>
 <td>アプリケーションのショートカット</td>
 </tr>
 <tr>
-<td>Bookmarks</td>
+<td>Downloads (ダウンロード)</td>
+<td>Windowsのデフォルトのダウンロード先</td>
+</tr>
+<tr>
+<td>Bookmarks (お気に入り)</td>
 <td>ウェブブラウザのブックマーク</td>
 </tr>
 <tr>
@@ -100,18 +112,6 @@
 <tr>
 <td>Videos (マイビデオ)</td>
 <td>ビデオファイル (*.mkv, *.mp4, *.wmv など)</td>
-</tr>
-<tr>
-<td>Archives</td>
-<td>アーカイブファイル (*.7zip, *.zip など)</td>
-</tr>
-<tr>
-<td>RegFiles</td>
-<td>レジストリからエクスポートしたデータ (*.reg)</td>
-</tr>
-<tr>
-<td>ISOs</td>
-<td>CD/DVDなどのイメージファイル (*.iso)</td>
 </tr>
 </tbody>
 </table>
@@ -140,10 +140,10 @@
 <p>PCでは物理的に1台しかないハードディスクを論理的に複数のハードディスクとして扱うことができます。具体的にはハードディスクを区画(パーティション)に分割し、その区画にドライブを割り当てます。Cドライブが占有しているハードディスクにDドライブを追加するには、Cドライブのパーティションを圧縮して空いたスペースに新しくパーティションを作成し、そのパーティションにDドライブを割り当てます。やり方については<a href="http://support.microsoft.com/kb/944248/ja">Windows でパーティションを増やすには?</a>を参照してください。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>D\Program FilesにはC\Program Filesのインストールフォルダから必要な設定ファイルのみをコピーします。インストーラによってアプリケーションをインストールする場合はデフォルトのインストール先であるC\Program Filesにインストールするようにしてください。他の場所にインストールすると問題を起こすことがあります。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>このフォルダにパスを通してどのアプリケーションからも参照できるようにしておきます。パスの設定方法については<a href="http://support.microsoft.com/kb/880124/ja">PATH を環境変数に設定する方法</a>を参照してください。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>このフォルダにパスを通してどのアプリケーションからも参照できるようにしておきます。パスの設定方法については<a href="http://support.microsoft.com/kb/880124/ja">PATH を環境変数に設定する方法</a>を参照してください。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>D\Program FilesにはC\Program Filesのインストールフォルダから必要な設定ファイルのみをコピーします。インストーラによってアプリケーションをインストールする場合はデフォルトのインストール先であるC\Program Filesにインストールするようにしてください。他の場所にインストールすると問題を起こすことがあります。&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
