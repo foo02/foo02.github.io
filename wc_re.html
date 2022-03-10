@@ -21,13 +21,14 @@
 <h2 id="はじめに">はじめに</h2>
 <p><a href="https://ja.wikipedia.org/wiki/%E3%83%AF%E3%82%A4%E3%83%AB%E3%83%89%E3%82%AB%E3%83%BC%E3%83%89_(%E6%83%85%E5%A0%B1%E5%87%A6%E7%90%86)">ワイルドカード</a>および<a href="https://ja.wikipedia.org/wiki/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE">正規表現</a>は文字列のパターンを指定する方法です。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>パターンに文字列が一致することを<em>マッチする</em>といい、パターンを指定するための文字として<em>メタキャラクタ</em>(全て半角)が定義されています。</p>
 <h2 id="ワイルドカード">ワイルドカード</h2>
+<p>ワイルドカードはファイル名やファイルパスを指定するために使用されます。</p>
 <p>ワイルドカードに使用するメタキャラクタは &ldquo;?&rdquo; および &ldquo;*&rdquo; です。</p>
 <p>&ldquo;?&rdquo; は任意の1文字を表します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">パターン &#34;foo???&#34; は &#34;foo123&#34;, &#34;fooabc&#34; などの文字列にマッチします。</code></pre></div>
 <p>&ldquo;*&rdquo; は任意の文字列を表します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">パターン &#34;foo*bar&#34; は foo で始まり bar で終わる文字列にマッチします。</code></pre></div>
-<p>ワイルドカードはファイル名やファイルパスを指定するために使用されます。</p>
 <h2 id="正規表現">正規表現</h2>
+<p>正規表現はテキストエディタなどで文字列の検索・置換に使用されます。</p>
 <p>正規表現に使用するメタキャラクタは次のとおり。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">$ * + - . ? [ \ ] ^ { | }</code></pre></div>
 <p>これらのメタキャラクタはパターンの中で特別な意味を持ち他の文字とは区別されます。</p>
@@ -119,7 +120,6 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">パターン &#34;.*&#34; は任意の文字列を表します。(ワイルドカードの &#34;*&#34; と同じ意味になります)
 パターン &#34;^$&#34; は空行を表します。
 パターン &#34;^.*$&#34; は任意の1行を表します。</code></pre></div>
-<p>正規表現はテキストエディタなどで文字列の検索・置換に使用されます。</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
