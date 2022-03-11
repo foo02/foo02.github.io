@@ -83,18 +83,18 @@
 </table>
 <p>ランレベル1がWindowsの<a href="https://ja.wikipedia.org/wiki/%E3%82%BB%E3%83%BC%E3%83%95%E3%83%A2%E3%83%BC%E3%83%89">セーフモード</a>に相当します。<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%83%BC%E3%83%A2%E3%83%B3_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)">デーモン</a>はWindowsの<a href="https://ja.wikipedia.org/wiki/Windows%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9">サービスプログラム</a>に相当します。</p>
 <h2 id="ブートローダ">ブートローダ</h2>
-<p>ブートローダには主に<a href="https://ja.wikipedia.org/wiki/GNU_GRUB">GRUB</a>(GRand Unified Bootloader)が使用されます。ブートローダはシステムを起動するプログラムです。Windowsや他のOSとのマルチブートにも対応しています。</p>
+<p><a href="https://ja.wikipedia.org/wiki/%E3%83%96%E3%83%BC%E3%83%88">ブートローダ</a>には主に<a href="https://ja.wikipedia.org/wiki/GNU_GRUB">GRUB</a>(GRand Unified Bootloader)が使用されます。ブートローダはシステムを起動するプログラムです。Windowsや他のOSとのマルチブートにも対応しています。</p>
 <h2 id="ファイルシステム">ファイルシステム</h2>
-<p>ファイルシステムには<a href="https://ja.wikipedia.org/wiki/Unix_File_System">UFS</a>(Unix File System)や<a href="https://ja.wikipedia.org/wiki/Ext">ext</a>(Extended File
+<p><a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">ファイルシステム</a>には<a href="https://ja.wikipedia.org/wiki/Unix_File_System">UFS</a>(Unix File System)や<a href="https://ja.wikipedia.org/wiki/Ext">ext</a>(Extended File
 System)などが使用されます。Windowsのファイルシステムのように断片化することはほとんどありません。<a href="https://ja.wikipedia.org/wiki/File_Allocation_Table">FAT</a>や<a href="https://ja.wikipedia.org/wiki/NT_File_System">NTFS</a>などのファイルシステムにもアクセスすることができます。</p>
 <h3 id="ファイル">ファイル</h3>
-<p>ファイル名の大文字と小文字は区別されます。ファイル名にスペースを入れることはできません。ファイル名の頭にピリオドをつけたファイル(通称ドットファイル)は隠しファイルとして扱われます。拡張子はユーザがファイルの種類を判別するために使用されますが、拡張子に基づいて動作するコマンドやアプリケーションもあります。Unixでは拡張子のことをサフィクス(suffix)といいます。</p>
+<p>Windowsとは異なり<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%90%8D">ファイル名</a>の大文字と小文字は区別されます。ファイル名にスペースを入れることはできません。ファイル名の頭にピリオドをつけたファイル(通称ドットファイル)は隠しファイルとして扱われます。<a href="https://ja.wikipedia.org/wiki/%E6%8B%A1%E5%BC%B5%E5%AD%90">拡張子</a>はユーザがファイルの種類を判別するために使用されますが、拡張子に基づいて動作するコマンドやアプリケーションもあります。Unixでは拡張子のことをサフィクス(suffix)といいます。</p>
 <h3 id="ディレクトリ">ディレクトリ</h3>
-<p>ディレクトリはWindowsのフォルダに相当します。</p>
+<p><a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA">ディレクトリ</a>はWindowsのフォルダに相当します。</p>
 <h3 id="シンボリックリンク">シンボリックリンク</h3>
-<p>シンボリックリンク(シムリンク)はWindowsのショートカットに相当します。</p>
+<p><a href="https://ja.wikipedia.org/wiki/%E3%82%BD%E3%83%95%E3%83%88%E3%83%AA%E3%83%B3%E3%82%AF">シンボリックリンク</a>(シムリンク)はWindowsのショートカットに相当します。</p>
 <h3 id="パーミッション">パーミッション</h3>
-<p>ファイルには<em>読み出し/書き込み/実行</em>の基本属性があります。実行属性が付与されていないプログラムやスクリプトは実行できません。ディレクトリもファイルと同じ属性を持ちますがその意味は次のようになります。</p>
+<p>ファイルには<em>読み出し/書き込み/実行</em>の<a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%91%E3%83%BC%E3%83%9F%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3">基本属性</a>があります。実行属性が付与されていないプログラムやスクリプトは実行できません。ディレクトリもファイルと同じ属性を持ちますがその意味は次のようになります。</p>
 <ul>
 <li>ディレクトリの読み出し属性: ディレクトリのファイルリストを取得できる</li>
 <li>ディレクトリの書き込み属性: ディレクトリにファイルを作成できるまたはディレクトリのファイルを削除できる</li>
@@ -109,26 +109,26 @@ System)などが使用されます。Windowsのファイルシステムのよう
 <h2 id="ディレクトリ構造">ディレクトリ構造</h2>
 <p><a href="https://ja.wikipedia.org/wiki/Filesystem_Hierarchy_Standard">FHS</a>(Filesystem Hierarchy Standard: ファイルシステム階層標準)で規定された<a href="https://ja.wikipedia.org/wiki/%E3%83%AB%E3%83%BC%E3%83%88%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA">ルートディレクトリ</a>を頂点とするディレクトリ構造を持ちます。そのためシステムがインストールされるパーティションはルートパーティションと呼ばれます。Windowsのようなドライブレターはなく他のドライブやパーティションは/devに収められた<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">デバイスファイル</a>として参照されます。パスの区切り文字には&quot;\&quot;(バックスラッシュ)ではなく&quot;/&quot;(スラッシュ)を使用します。詳細については<a href="http://linuxjm.sourceforge.jp/html/LDP_man-pages/man7/hier.7.html">Man page of HIER</a>を参照してください。</p>
 <h2 id="ホームディレクトリ">ホームディレクトリ</h2>
-<p>/homeに各ユーザのホームディレクトリが配置されます。ユーザを追加すると/etc/skelの内容が新しいユーザのホームディレクトリにコピーされます。コマンド入力時にはホームディレクトリのパスを~(チルダ)で置き換えることができます。</p>
+<p>/homeに各ユーザの<a href="https://ja.wikipedia.org/wiki/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA">ホームディレクトリ</a>が配置されます。ユーザを追加すると/etc/skelの内容が新しいユーザのホームディレクトリにコピーされます。コマンド入力時にはホームディレクトリのパスを~(チルダ)で置き換えることができます。</p>
 <h2 id="設定ファイル">設定ファイル</h2>
-<p>システムやアプリケーションの設定はテキストファイルに保存されます。Windowsの<a href="https://ja.wikipedia.org/wiki/%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA">レジストリ</a>のようなものは存在しません。設定を変更する場合はテキストエディタで設定ファイルを書き換えます。ユーザの設定はホームディレクトリにドットファイルとして保存されます。ファイル名のサフィクスとしてよく使用されるrcは&quot;Run
+<p>システムやアプリケーションの設定はテキストファイルに保存されます。Windowsの<a href="https://ja.wikipedia.org/wiki/%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA">レジストリ</a>のようなものは存在しません。設定を変更する場合はテキストエディタで<a href="https://ja.wikipedia.org/wiki/%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">設定ファイル</a>を書き換えます。ユーザの設定はホームディレクトリにドットファイルとして保存されます。ファイル名のサフィクスとしてよく使用されるrcは&quot;Run
 Command&quot;の略です。</p>
 <h2 id="アーカイブファイル">アーカイブファイル</h2>
-<p>ファイルは<a href="https://ja.wikipedia.org/wiki/Gzip">gzip</a>(*.gz)というプログラムで圧縮します。サイズの大きなファイルにはgzipよりも圧縮率の高い<a href="https://ja.wikipedia.org/wiki/Bzip2">bzip2</a>(*.bz2)という圧縮プログラムを使用します。複数のファイルをアーカイブする場合は<a href="https://ja.wikipedia.org/wiki/Tar">tar</a>(*.tar)というプログラムで1つのファイルにまとめてからgzipやbzip2で圧縮します。tarを使って圧縮されたファイル(*.tar.gz, *.tar.bz2)をターボール(tarball)ということがあります。紛らわしいですがWindowsのアーカイブフォーマット(*.zip)とは関係ありません。</p>
+<p>ファイルを圧縮するには<a href="https://ja.wikipedia.org/wiki/Gzip">gzip</a>(*.gz)というコマンドを使用します。gzipよりも圧縮率の高い<a href="https://ja.wikipedia.org/wiki/Bzip2">bzip2</a>(*.bz2)というコマンドも使用できます。複数のファイルを<a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%BC%E3%82%AB%E3%82%A4%E3%83%96_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF)">アーカイブ</a>する場合は<a href="https://ja.wikipedia.org/wiki/Tar">tar</a>(*.tar)というプログラムで1つのファイルにまとめてからgzipやbzip2で圧縮します。tarを使って圧縮されたファイル(*.tar.gz, *.tar.bz2)をターボール(tarball)ということがあります。紛らわしいですがWindowsのアーカイブフォーマット(*.zip)とは関係ありません。</p>
 <h2 id="デバイスファイル">デバイスファイル</h2>
-<p>ハードディスクドライブや光学ドライブなどのデバイスはファイルとして扱われます。Windowsのようにドライブレターで区別することはしません。デバイスファイルは/devに収められています。デバイスにアクセスする場合はデバイスファイルを任意のディレクトリに<a href="https://ja.wikipedia.org/wiki/Mount_(UNIX)">マウント</a>します。デバイスをディレクトリにマウントすると、マウントしたデバイスの内容をそのディレクトリから参照したり操作したりすることができます。/etc/fstabを書き換えて起動時に自動でマウントさせるようにすることもできます。</p>
+<p>ハードディスクドライブや光学ドライブなどのデバイスはファイルとして扱われます。Windowsのようにドライブレターで区別することはしません。<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB">デバイスファイル</a>は/devに収められています。デバイスにアクセスする場合はデバイスファイルを任意のディレクトリに<a href="https://ja.wikipedia.org/wiki/Mount_(UNIX)">マウント</a>します。デバイスをディレクトリにマウントすると、マウントしたデバイスの内容をそのディレクトリから参照したり操作したりすることができます。/etc/fstabを書き換えて起動時に自動でマウントさせるようにすることもできます。</p>
 <h2 id="パッケージシステム">パッケージシステム</h2>
 <p>利用できるアプリケーションは<a href="https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E7%AE%A1%E7%90%86%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">パッケージ</a>という形で<a href="https://ja.wikipedia.org/wiki/%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA">リポジトリ</a>というサーバに置かれています。パッケージの形式はディストリビューションによって異なります。パッケージはパッケージマネージャを使用してインストール・アップデート・アンインストールします。インストール済みのパッケージをまとめてアップデートすることもできます。</p>
 <h2 id="ウィンドウシステム">ウィンドウシステム</h2>
-<p>ウィンドウシステムには<a href="https://ja.wikipedia.org/wiki/X_Window_System">X Window System</a>を採用しています。<a href="https://ja.wikipedia.org/wiki/X%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3">ディスプレイマネージャ</a>がログイン画面を表示してログインと同時にXが起動します。ログイン後は<a href="https://ja.wikipedia.org/wiki/X%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3">ウィンドウマネージャ</a>がウィンドウを制御します。機能や見た目の異なるウィンドウマネージャを自由に選択することができます。</p>
+<p><a href="https://ja.wikipedia.org/wiki/%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">ウィンドウシステム</a>には<a href="https://ja.wikipedia.org/wiki/X_Window_System">X Window System</a>を採用しています。<a href="https://ja.wikipedia.org/wiki/X%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3">ディスプレイマネージャ</a>がログイン画面を表示してログインと同時にXが起動します。ログイン後は<a href="https://ja.wikipedia.org/wiki/X%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3">ウィンドウマネージャ</a>がウィンドウを制御します。機能や見た目の異なるウィンドウマネージャを自由に選択することができます。</p>
 <h2 id="日本語入力システム">日本語入力システム</h2>
-<p>日本語入力は入力メソッドと変換エンジンによって実現されます。入力メソッドが入力を受け付け変換エンジンが漢字に変換します。</p>
+<p><a href="https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9B%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0">日本語入力</a>は<a href="https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%B3%E3%83%97%E3%83%83%E3%83%88%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89">入力メソッド</a>と変換エンジンによって実現されます。入力メソッドが入力を受け付け変換エンジンが漢字に変換します。</p>
 <h2 id="サウンドシステム">サウンドシステム</h2>
 <p>オーディオデバイスは<a href="https://ja.wikipedia.org/wiki/PulseAudio">PulseAudio</a>や<a href="https://ja.wikipedia.org/wiki/Advanced_Linux_Sound_Architecture">ALSA</a>(Advanced Linux Sound Architecture)によって操作します。</p>
 <h2 id="印刷システム">印刷システム</h2>
 <p>プリンタは<a href="https://ja.wikipedia.org/wiki/CUPS">CUPS</a>(Common Unix Printing System)によって操作します。</p>
 <h2 id="デスクトップ環境">デスクトップ環境</h2>
-<p>Windowsのようなデスクトップ環境も使用することができます。代表的なデスクトップ環境は<a href="https://ja.wikipedia.org/wiki/GNOME">GNOME</a>と<a href="https://ja.wikipedia.org/wiki/KDE">KDE</a>です。より軽量なデスクトップ環境としては<a href="https://ja.wikipedia.org/wiki/Xfce">Xfce</a>や<a href="https://ja.wikipedia.org/wiki/LXDE">LXDE</a>などがあります。この他にも様々なデスクトップ環境が用意されています。</p>
+<p>Windowsのような<a href="https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%B9%E3%82%AF%E3%83%88%E3%83%83%E3%83%97%E7%92%B0%E5%A2%83">デスクトップ環境</a>も使用することができます。代表的なデスクトップ環境は<a href="https://ja.wikipedia.org/wiki/GNOME">GNOME</a>と<a href="https://ja.wikipedia.org/wiki/KDE">KDE</a>です。より軽量なデスクトップ環境としては<a href="https://ja.wikipedia.org/wiki/Xfce">Xfce</a>や<a href="https://ja.wikipedia.org/wiki/LXDE">LXDE</a>などがあります。この他にも様々なデスクトップ環境が用意されています。</p>
 
 
     </div><footer>
