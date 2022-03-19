@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://foo02.github.io/miniplay.html</loc>
+    <lastmod>2021-12-17T08:54:35+09:00</lastmod>
+  </url><url>
     <loc>https://foo02.github.io/miniview.html</loc>
     <lastmod>2021-12-01T14:16:56+09:00</lastmod>
-  </url><url>
-    <loc>https://foo02.github.io/mail_form.html</loc>
-    <lastmod>2020-01-03T12:44:17+09:00</lastmod>
   </url><url>
     <loc>https://foo02.github.io/tex.html</loc>
     <lastmod>2020-01-02T11:12:14+09:00</lastmod>

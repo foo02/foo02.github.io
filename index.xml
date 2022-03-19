@@ -7,21 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language><atom:link href="https://foo02.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>MiniView</title>
+      <title>Miniplay 220203</title>
+      <link>https://foo02.github.io/miniplay.html</link>
+      <pubDate>Fri, 17 Dec 2021 08:54:35 +0900</pubDate>
+      
+      <guid>https://foo02.github.io/miniplay.html</guid>
+      <description>はじめに MiniPlayはシンプルなメディアプレーヤです。 スクリーンショット 動作環境 Windows7で動作確認しています。 開発環境 以下のもの</description>
+    </item>
+    
+    <item>
+      <title>MiniView 220203</title>
       <link>https://foo02.github.io/miniview.html</link>
       <pubDate>Wed, 01 Dec 2021 14:16:56 +0900</pubDate>
       
       <guid>https://foo02.github.io/miniview.html</guid>
-      <description>はじめに MiniViewはシンプルなテキストビューア兼イメージビューアです。 スクリーンショット ダウンロード 以下のアーカイブはご自身の環境(3</description>
-    </item>
-    
-    <item>
-      <title>メールフォーム</title>
-      <link>https://foo02.github.io/mail_form.html</link>
-      <pubDate>Fri, 03 Jan 2020 12:44:17 +0900</pubDate>
-      
-      <guid>https://foo02.github.io/mail_form.html</guid>
-      <description>&amp;lt;!-ninja_style_mailform-&amp;gt; &amp;lt;!-ninja_style_mailform-&amp;gt;</description>
+      <description>はじめに MiniViewはシンプルなテキストビューア兼イメージビューアです。 スクリーンショット 動作環境 Windows7で動作確認しています。</description>
     </item>
     
     <item>
@@ -30,7 +30,7 @@
       <pubDate>Thu, 02 Jan 2020 11:12:14 +0900</pubDate>
       
       <guid>https://foo02.github.io/tex.html</guid>
-      <description>はじめに TeX(テフもしくはテック)は高度な組版作業を自動化します。このサイトの記事をTeXで処理するとこのようになります。TeXを利用すれ</description>
+      <description>はじめに TeX(テフもしくはテック)は高度な組版作業を自動化します。このページの記事をTeXで処理するとこのようになります。TeXを利用すれ</description>
     </item>
     
     <item>
@@ -57,7 +57,7 @@
       <pubDate>Thu, 02 Jan 2020 11:12:14 +0900</pubDate>
       
       <guid>https://foo02.github.io/my_websites.html</guid>
-      <description>ウェブ検索: DuckDuckGo 英和辞典: 英辞郎 / Weblio辞書 国語辞典: goo辞書 百科事典: Wikipedia IT用語辞典: e-Words 商品検索: Amazon フリーソフト: 窓の杜 / OSDN / ｋ本的</description>
+      <description>ウェブ検索: DuckDuckGo 英和辞典: 英辞郎 / Weblio辞書 国語辞典: goo辞書 百科事典: Wikipedia IT用語辞典: e-Words 商品検索: Amazon フリーソフト: 窓の杜 / OSDN / PortableApps.com / ｋ</description>
     </item>
     
     <item>
@@ -75,7 +75,7 @@
       <pubDate>Thu, 02 Jan 2020 11:12:13 +0900</pubDate>
       
       <guid>https://foo02.github.io/unix_windows.html</guid>
-      <description>はじめに パソコンを使用するには最初にOSというソフトをインストールする必要があります。市販のパソコンにはWindowsというOSが付属してい</description>
+      <description>はじめに パーソナルコンピュータ(PC)を使用するには最初にオペレーティングシステム(OS)というソフトウェアをインストールする必要があります</description>
     </item>
     
     <item>
@@ -129,7 +129,7 @@
       <pubDate>Thu, 02 Jan 2020 11:12:12 +0900</pubDate>
       
       <guid>https://foo02.github.io/security.html</guid>
-      <description>はじめに PCの安全性と機密性を高めるための方策を列挙します。 システムのセキュリティ ユーザアカウントにパスワードを設定する。 自動再生機能を無効</description>
+      <description>はじめに PCの安全性と機密性を高めるための方策を列挙します。 メディアのセキュリティ ハードディスクのパーティションをVeraCryptやLUK</description>
     </item>
     
     <item>
@@ -138,7 +138,7 @@
       <pubDate>Thu, 02 Jan 2020 11:12:11 +0900</pubDate>
       
       <guid>https://foo02.github.io/pc_env.html</guid>
-      <description>はじめに ここではPCを選択する際に知っておくべきことを紹介します。 PCの選択 PCの選択基準は主にCPU・メモリ・ストレージの3つです。 CPU CP</description>
+      <description>はじめに ここではPCを選択する際に知っておくべきことを紹介します。 PCの選択基準 PCの選択基準は主にCPU・メモリ・ストレージの3つです。 CPU</description>
     </item>
     
     <item>
@@ -174,7 +174,7 @@
       <pubDate>Thu, 02 Jan 2020 11:12:10 +0900</pubDate>
       
       <guid>https://foo02.github.io/local_wiki.html</guid>
-      <description>はじめに ウィキとはウェブブラウザからウェブサイトのページを作成・編集できる仕組みです。HTMLよりもシンプルなマークアップ言語を使用して誰で</description>
+      <description>はじめに ウェブページはHTMLというマークアップ言語で記述します。マークアップ言語は文章の構造や見た目を指示するものです。 ウィキはウェブペー</description>
     </item>
     
     <item>
@@ -192,7 +192,7 @@
       <pubDate>Thu, 02 Jan 2020 11:12:09 +0900</pubDate>
       
       <guid>https://foo02.github.io/file_app.html</guid>
-      <description>はじめに よく使用するファイルの種類・ファイルフォーマットおよびそれらのファイルを扱うアプリケーションについて説明します。 テキストファイルの種</description>
+      <description>はじめに よく使用するファイルの種類・ファイルフォーマットおよびそれらのファイルを扱うアプリケーションについて説明します。 ファイルはテキストフ</description>
     </item>
     
     <item>
