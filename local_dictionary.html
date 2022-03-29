@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ローカル辞書</title>
+<link rel="stylesheet" href="https://foo02.github.io/normalize.css" />
+<link rel="stylesheet" href="https://foo02.github.io/style.css" />
+<link rel="icon" href="/favicon.png" />
+</head><body><header>
+<div id="date"></div>
+<div><a href="https://foo02.github.io/">トップページ</a></div>
+<h1>ローカル辞書</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#辞書データのダウンロード">辞書データのダウンロード</a></li>
+    <li><a href="#辞書データの整形">辞書データの整形</a></li>
+    <li><a href="#辞書データの登録-mouse-dictionary">辞書データの登録 (Mouse Dictionary)</a></li>
+    <li><a href="#辞書データの登録-サクラエディタ">辞書データの登録 (サクラエディタ)</a></li>
+  </ul>
+</nav>
+</header><div id="content">
+<h2 id="はじめに">はじめに</h2>
+<p>ローカルの辞書データを使用すればオンラインの辞書サイトよりも高速に辞書を引くことができます。ここではパブリックドメインで公開されている英和辞書のデータをローカルの辞書として利用する方法を紹介します。</p>
+<h2 id="辞書データのダウンロード">辞書データのダウンロード</h2>
+<p><a href="https://www.kujirahand.com/web-tools/EJDictFreeDL.php">こちらのサイト</a>から英和辞書のデータ(テキスト形式)をダウンロードすることができます。ダウンロードしたアーカイブから辞書データのファイル(ejdict-hand-utf8.txt)を取り出します。このファイルはテキストファイルなのでテキストエディタを使用して自由に読み書きすることができます。</p>
+<h2 id="辞書データの整形">辞書データの整形</h2>
+<p>ダウンロードした辞書データには重複する項目が含まれています。これでは都合が悪いので以下のようなPerlスクリプトを使用して重複する項目をひとつにまとめます。PerlはMSYS2にインストールされています。<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>スクリプトを実行する前にejdict-hand-utf8.txtをスクリプトファイルと同じ場所に置いてください。</p>
+
+
+<figure class="xCodeBlock">
+<figcaption class="xCodeBlock_title">foo.pl</figcaption>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Perl" data-lang="Perl">open(IN, <span style="color:#e6db74">&#34;ejdict-hand-utf8.txt&#34;</span>) <span style="color:#f92672">||</span> die <span style="color:#e6db74">&#34;ファイルが見つかりません&#34;</span>;
+open(OUT, <span style="color:#e6db74">&#34;&gt;ejdict-hand-utf8.out&#34;</span>);
+
+$first <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+$prev, $next;
+$prev_head, $next_head;
+
+<span style="color:#66d9ef">while</span>(<span style="color:#e6db74">&lt;IN&gt;</span>) {
+  
+  <span style="color:#66d9ef">if</span> ($first) {
+    $prev <span style="color:#f92672">=</span> $_;
+    $next <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+    $first <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">next</span>;
+  }
+  
+  <span style="color:#66d9ef">if</span> ($prev <span style="color:#f92672">ne</span> <span style="color:#e6db74">&#34;&#34;</span>) {
+    $prev <span style="color:#f92672">=~</span><span style="color:#e6db74"> /^.+\t/</span>;
+    $prev_head <span style="color:#f92672">=</span> $&amp;;
+    $next <span style="color:#f92672">=</span> $_;
+    $next <span style="color:#f92672">=~</span><span style="color:#e6db74"> /^.+\t/</span>;
+    $next_head <span style="color:#f92672">=</span> $&amp;;
+    <span style="color:#75715e"># if ($prev_head =~ /$next_head/i) { # 大文字小文字を区別しない</span>
+    <span style="color:#66d9ef">if</span> ($prev_head <span style="color:#f92672">eq</span> $next_head) { <span style="color:#75715e"># 大文字小文字を区別する</span>
+      $prev <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/\n$//</span>;
+      $next <span style="color:#f92672">=~</span> <span style="color:#e6db74">s/^.+\t/ \/ /</span>;
+      $prev <span style="color:#f92672">.=</span> $next;
+      $next <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#66d9ef">print</span> OUT $prev;
+      $prev <span style="color:#f92672">=</span> $next;
+    }
+  }
+  
+}
+
+close(IN);
+close(OUT);</code></pre></div></div>
+</figure>
+<p>スクリプトファイルを指定してコマンドperlを入力します。整形されたデータがejdict-hand-utf8.outとして出力されます。</p>
+
+
+<figure class="xCodeBlock">
+
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext"># perl foo.pl</code></pre></div></div>
+</figure>
+<h2 id="辞書データの登録-mouse-dictionary">辞書データの登録 (Mouse Dictionary)</h2>
+<p><a href="https://mouse-dictionary.netlify.app/ja/">Mouse Dictionary</a>は辞書の機能を追加するブラウザの拡張機能です。ローカルの辞書データを登録することができます。</p>
+<ol>
+<li>Mouse Dictionaryをウェブブラウザに追加します。</li>
+<li>ブラウザに追加されたMouse Dictionaryのアイコンを右クリックして<em>オプション</em>を選択します。</li>
+<li><em>辞書データの文字コード</em>に<em>UTF-8</em>を選択します。</li>
+<li><em>辞書データの形式</em>に<em>TSV</em>を選択します。</li>
+<li><em>辞書データの読み込み</em>から上で用意したejdict-hand-utf8.outを選択します。</li>
+<li><em>LOAD</em>をクリックします。</li>
+</ol>
+<p>以上で辞書データの登録は完了です。その他の設定は好みに応じて変更してください。</p>
+<p>使用するにはブラウザのMouse Dictionaryのアイコンをクリックします。表示されたウィンドウにマウスでポイントした英単語の意味が表示されます。</p>
+<h2 id="辞書データの登録-サクラエディタ">辞書データの登録 (サクラエディタ)</h2>
+<p><a href="https://sakura-editor.github.io/">サクラエディタ</a>のキーワードヘルプ機能をローカルの辞書として使用することができます。ただし、辞書データのフォーマットがMouse Dictionaryとは異なり<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>、文字コードがUnicodeのままでは文字化けします。テキストエディタでejdict-hand-utf8.outを整形してから文字コードにShift-JISを指定してejdict-hand-utf8.khpとして保存してください。</p>
+<ol>
+<li>サクラエディタを起動します。</li>
+<li>メニューから <em>設定 -&gt; タイプ別設定一覧</em> を選択します。</li>
+<li>キーワードヘルプ機能を使用したいファイルタイプをリストから選択して<em>設定変更</em>をクリックします。</li>
+<li><em>キーワードヘルプ</em>のタブを選択して<em>キーワードヘルプ機能を使う</em>をチェックします。</li>
+<li><em>辞書ファイル</em>から上で用意したejdict-hand-utf8.khpを選択します。</li>
+<li><em>OK</em>をクリックします。</li>
+</ol>
+<p>以上で辞書データの登録は完了です。その他の設定は好みに応じて変更してください。</p>
+<p>使用するにはテキストファイルを開いて英単語を選択します。ポップアップに英単語の意味が表示されます。</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Perlの詳細については<a href="http://wisdom.sakura.ne.jp/programming/perl/index.html">Perl入門</a>や<a href="https://www.tohoho-web.com/wwwperl.htm">とほほのperl入門</a>を参照してください。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>フォーマットの詳細についてはサクラエディタのヘルプを参照してください。&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+    </div><footer>
+<span>Powered by <a href="https://gohugo.io/">Hugo</a></span>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=13&l=ez&f=ifr&linkID=fd3be03ff2b0d855a5bee93947c62cb5&t=foo23-22&tracking_id=foo23-22" width="468" height="60" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+</footer>
+
+</body>
+</html>
