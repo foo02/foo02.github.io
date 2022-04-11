@@ -35,7 +35,7 @@
 <p>メタキャラクタ以外の文字はその文字自身を表します。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">パターン &#34;foo&#34; は文字列 &#34;foo&#34; にマッチします。
 パターン &#34;bar&#34; は文字列 &#34;bar&#34; にマッチします。</code></pre></div>
-<p>メタキャラクタを普通の文字として扱いたいときは直前に &ldquo;\&rdquo; をつけます。これを<em>エスケープする</em>と言います。</p>
+<p>メタキャラクタを普通の文字として扱いたいときは直前に &ldquo;\&rdquo; をつけます。これを<em>エスケープする</em>といいます。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">パターン &#34;foo\\bar&#34; は文字列 &#34;foo\bar&#34; にマッチします。
 パターン &#34;foo\*bar&#34; は文字列 &#34;foo*bar&#34; にマッチします。</code></pre></div>
 <p>任意の文字を表すには &ldquo;.&rdquo; と &ldquo;[ ]&rdquo; を使用します。</p>
@@ -52,7 +52,7 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">パターン &#34;[0-9]&#34; は数字にマッチします。
 パターン &#34;[a-z]&#34; は英小文字にマッチします。
 パターン &#34;[-bar]&#34; は &#34;-&#34;, &#34;b&#34;, &#34;a&#34;, &#34;r&#34; の各文字にマッチします。先頭の &#34;-&#34; はメタキャラクタとして扱われません。
-パターン &#34;[9-0]&#34; は無効な表現です。文字コードが左から右へ昇順になるよう記述する必要があります。</code></pre></div>
+パターン &#34;[9-0]&#34; は無効な表現です。文字コードが左から右へ昇順になるように記述する必要があります。</code></pre></div>
 <p>&ldquo;[ ]&rdquo; 内の先頭の &ldquo;^&rdquo; は否定を意味するメタキャラクタになります。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">パターン &#34;[^bar]&#34; は &#34;b&#34;, &#34;a&#34;, &#34;r&#34; 以外の文字にマッチします。
 パターン &#34;[^0-9]&#34; は数字以外の文字にマッチします。
