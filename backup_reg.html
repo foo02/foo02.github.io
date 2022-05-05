@@ -25,26 +25,26 @@
 <h2 id="レジストリキーのバックアップ">レジストリキーのバックアップ</h2>
 <p>特定のレジストリキーをバックアップするには<em>レジストリエディタ</em>を使用します。詳細については<a href="http://windows.microsoft.com/ja-JP/windows7/Back-up-the-registry">レジストリをバックアップする</a>を参照してください。</p>
 <p>ここではバッチファイルを使用して一度に複数のレジストリキーをバックアップする方法を紹介します。テキストエディタで次のようなバッチファイル(拡張子が*.batのテキストファイル)を作成してください。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">@echo off
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">@echo off
 
-:: レジストリのバックアップ
+:: レジストリのバックアップ
 
-:: 最初にバックアップ先のフォルダを指定します。
+:: 最初にバックアップ先のフォルダを指定します。
 
-:: 次のコマンドでバックアップ先のフォルダに移動します。
-:: cd /d &#34;バックアップ先のフォルダのパス&#34;
+:: 次のコマンドでバックアップ先のフォルダに移動します。
+:: cd /d &#34;バックアップ先のフォルダのパス&#34;
 
-cd /d &#34;D:\RegFiles&#34;
+cd /d &#34;D:\RegFiles&#34;
 
-:: 以下でレジストリキーをバックアップします。
+:: 以下でレジストリキーをバックアップします。
 
-:: 次のコマンドでレジストリキーをエクスポートします。
-:: reg export &#34;エクスポートするキーのパス&#34; &#34;レジストリファイル(*.reg)の名前&#34; /y
-:: - キーのパスはレジストリエディタからコピーします。
-:: - 複数のキーをバックアップする場合は複数行にわたって記述します。
+:: 次のコマンドでレジストリキーをエクスポートします。
+:: reg export &#34;エクスポートするキーのパス&#34; &#34;レジストリファイル(*.reg)の名前&#34; /y
+:: - キーのパスはレジストリエディタからコピーします。
+:: - 複数のキーをバックアップする場合は複数行にわたって記述します。
 
-reg export &#34;HKEY_CURRENT_USER\Console&#34; &#34;Console.reg&#34; /y
-reg export &#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit&#34; &#34;Regedit.reg&#34; /y</code></pre></div>
+reg export &#34;HKEY_CURRENT_USER\Console&#34; &#34;Console.reg&#34; /y
+reg export &#34;HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit&#34; &#34;Regedit.reg&#34; /y</code></pre></div>
 <p>このバッチファイルを実行するとバックアップ先のフォルダにレジストリファイル(*.reg)が作成されます。このレジストリファイルを実行するとバックアップしたレジストリを復元することができます。</p>
 
 

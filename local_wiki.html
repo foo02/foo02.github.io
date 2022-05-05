@@ -56,19 +56,19 @@ modules</em>のApacheとMySQLをチェックし<em>Save</em>をクリックし�
 <h3 id="mediawikiのインストール">MediaWikiのインストール</h3>
 <p>XAMPPのインストールが終了したらMediaWikiをインストールします。インストールする前にMediaWikiで使用するデータベースを作成しておきます。ApacheとMySQLを起動して<a href="http://localhost/phpmyadmin/">phpMyAdmin</a>にアクセスします。<em>データベース</em>をクリックしてデータベース名を入力し<em>作成</em>をクリックします。作成したデータベースの名前はMediaWikiのセットアップ作業で入力する必要があるので覚えておいてください。MediaWikiの公式サイト<a href="https://www.mediawiki.org/wiki/MediaWiki/ja">MediaWiki</a>からMediaWikiをダウンロードします。ダウンロードしたアーカイブを展開するとmediawiki-*というフォルダが生成されます。このフォルダをmwにリネームしてC:\xampp\htdocsに置きます。フォルダ名は任意ですがここではmwとします。<a href="http://localhost/mw/">http://localhost/mw/</a>にアクセスし指示に従ってMediaWikiをセットアップします。セットアップが終了したらダウンロードしたLocalsetting.phpをC:\xampp\htdocs\mwに置いて<a href="http://localhost/mw/">http://localhost/mw/</a>
 にアクセスします。MediaWikiが正常に機能していることを確認してください。警告(Warning)が表示される場合はC:\xampp\php\php.iniの</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-INI" data-lang="INI"><span style="color:#a6e22e">display_errors </span><span style="color:#f92672">=</span><span style="color:#e6db74"> On</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-INI" data-lang="INI"><span style="color:#a6e22e">display_errors</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">On</span></code></pre></div>
 <p>をOnからOffにします。</p>
 <h3 id="xamppのアップデート">XAMPPのアップデート</h3>
 <p>XAMPPのアップデートは再インストールになります。新しいXAMPPをインストールする前に作成済みのデータベースをエクスポートします。ApacheとMySQLを起動して<a href="http://localhost/phpmyadmin/">phpMyAdmin</a>にアクセスします。左のペインから自分が作成したデータベースをクリックします。<em>エクスポート</em>をクリックして<em>実行</em>をクリックします。<em>データベース名.sql</em>というファイルがダウンロードされます。複数のデータベースを作成した場合は同じ手順を繰り返します。エクスポートの作業が終了したらApacheとMySQLを停止してXAMPPを終了します。既存のC:\xamppをバックアップしてから新しいXAMPPをインストールします。インストールが終了したらC:\xampp\php\php.iniの以下の設定値を変更します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-INI" data-lang="INI"><span style="color:#a6e22e">max_execution_time </span><span style="color:#f92672">=</span><span style="color:#e6db74"> 300</span>
-<span style="color:#a6e22e">memory_limit </span><span style="color:#f92672">=</span><span style="color:#e6db74"> 512M</span>
-<span style="color:#a6e22e">post_max_size </span><span style="color:#f92672">=</span><span style="color:#e6db74"> 256M</span>
-<span style="color:#a6e22e">upload_max_filesize </span><span style="color:#f92672">=</span><span style="color:#e6db74"> 256M</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-INI" data-lang="INI"><span style="color:#a6e22e">max_execution_time</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">300</span>
+<span style="color:#a6e22e">memory_limit</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">512M</span>
+<span style="color:#a6e22e">post_max_size</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">256M</span>
+<span style="color:#a6e22e">upload_max_filesize</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">256M</span></code></pre></div>
 <p>エクスポートしたデータベースをインポートするためApacheとMySQLを起動して<a href="http://localhost/phpmyadmin/">phpMyAdmin</a>にアクセスします。<em>データベース</em>をクリックしてエクスポートしたデータベースと同名のデータベースを作成します。データベース名を入力して<em>作成</em>をクリックします。続けて<em>インポート</em>をクリックします。<em>ファイル選択</em>をクリックしてエクスポートした同名のデータベースを選択し<em>実行</em>をクリックします。複数のデータベースをエクスポートした場合は同じ手順を繰り返します。最後にバックアップしたxampp\htdocs\mwをC:\xampp\htdocsに戻します。</p>
 <h3 id="mediawikiのアップデート">MediaWikiのアップデート</h3>
 <p>MediaWikiのアップデートは上書きインストールになります。C:\xampp\htdocs\mwのファイルを新しいMediaWikiのファイルで上書きしてください。続けてApacheとMySQL
 を起動しコマンドプロンプトで</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">C:\xampp\php\php.exe C:\xampp\htdocs\mw\maintenance\update.php</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-plaintext" data-lang="plaintext">C:\xampp\php\php.exe C:\xampp\htdocs\mw\maintenance\update.php</code></pre></div>
 <p>と入力します。上記のコマンドの処理が正常に終了したら<a href="http://localhost/mw/">http://localhost/mw/</a>
 にアクセスします。MediaWikiが正常に機能していることを確認してください。</p>
 <section class="footnotes" role="doc-endnotes">
