@@ -388,30 +388,29 @@
 </figure>
 
 <h3 id="ビルド作業の自動化">ビルド作業の自動化</h3>
-<p>上のようにコマンドを入力して実行ファイルを作成する作業を<em>ビルド</em>といいます。コマンドmakeを使用すればビルドの処理を自動化することができます。以下のようなビルドの処理内容を記述したMakefile(もしくはmakefile)というファイルを作成してコマンドmakeを入力すると実行ファイルwindow.exeが生成されます。make cleanと入力すればオブジェクトファイルが削除されます。<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>詳細については<a href="http://x68000.q-e-d.net/~68user/unix/pickup?make">コマンド:make: UNIX/Linuxの部屋</a>/<a href="http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/gnu-make/rule.html">自動化のためのGNU Make入門講座</a>/<a href="https://maku77.github.io/memo/tool/make.html">make を使いこなすためのメモ | まくまくいろいろノート</a>/<a href="https://www.ecoop.net/coop/translated/GNUMake3.77/make_toc.jp.html">GNU make 日本語訳</a>などを参照してください。</p>
+<p>上のようにコマンドを入力して実行ファイルを作成する作業を<em>ビルド</em>といいます。コマンドmakeを使用すればビルドの処理を自動化することができます。以下のようなビルドの処理内容を記述したMakefile(もしくはmakefile)というファイルを作成してコマンドmakeを入力すると実行ファイルfoo.exeが生成されます。make cleanと入力すればオブジェクトファイルが削除されます。<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>詳細については<a href="http://x68000.q-e-d.net/~68user/unix/pickup?make">コマンド:make: UNIX/Linuxの部屋</a>/<a href="http://objectclub.jp/community/memorial/homepage3.nifty.com/masarl/article/gnu-make/rule.html">自動化のためのGNU Make入門講座</a>/<a href="https://maku77.github.io/memo/tool/make.html">make を使いこなすためのメモ | まくまくいろいろノート</a>/<a href="https://www.ecoop.net/coop/translated/GNUMake3.77/make_toc.jp.html">GNU make 日本語訳</a>などを参照してください。</p>
 
 
 <figure class="xCodeBlock">
 <figcaption class="xCodeBlock_title">Makefile</figcaption>
-<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Base Makefile" data-lang="Base Makefile">TARGET <span style="color:#f92672">=</span> window.exe <span style="color:#75715e"># 生成される実行ファイル</span>
-SRCS <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>notdir <span style="color:#66d9ef">$(</span>shell find ./ -name <span style="color:#e6db74">&#39;*.c&#39;</span><span style="color:#66d9ef">))</span> <span style="color:#75715e"># コンパイルするソースファイル(*.c)</span>
-OBJS <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>SRCS:.c<span style="color:#f92672">=</span>.o<span style="color:#66d9ef">)</span> resource.o <span style="color:#75715e"># コンパイルするオブジェクトファイル(*.o)</span>
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Base Makefile" data-lang="Base Makefile">TARGET <span style="color:#f92672">=</span> foo.exe <span style="color:#75715e"># 生成される実行ファイル</span>
+SOURCES <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>notdir <span style="color:#66d9ef">$(</span>shell find ./ -name <span style="color:#e6db74">&#39;*.c&#39;</span><span style="color:#66d9ef">))</span> <span style="color:#75715e"># コンパイルするソースファイル(*.c)</span>
+OBJECTS <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>SOURCES:.c<span style="color:#f92672">=</span>.o<span style="color:#66d9ef">)</span> resource.o <span style="color:#75715e"># リンクするオブジェクトファイル(*.o)</span>
 CC <span style="color:#f92672">=</span> gcc <span style="color:#75715e"># 使用するコンパイラ</span>
-CFLAGS <span style="color:#f92672">=</span> <span style="color:#ae81ff">\ </span><span style="color:#75715e"># コンパイラのオプション</span>
-  -s -O2 -Wall -fexec-charset<span style="color:#f92672">=</span>cp932 <span style="color:#75715e"># リリース用</span>
-<span style="color:#75715e">#  -g -O0 -Wall -fexec-charset=cp932 # デバッグ用
+CFLAGS <span style="color:#f92672">=</span> -g -O0 -Wall -fexec-charset<span style="color:#f92672">=</span>cp932 <span style="color:#75715e"># コンパイラのオプション(デバッグ用)</span>
+<span style="color:#75715e"># CFLAGS = -s -O2 -Wall -fexec-charset=cp932 # コンパイラのオプション(リリース用)
 </span><span style="color:#75715e"></span>
 <span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span> all clean
 
 <span style="color:#a6e22e">all</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>TARGET<span style="color:#66d9ef">)</span>
 
 <span style="color:#75715e"># オブジェクトファイルから実行ファイルを作成
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">$(TARGET)</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>OBJS<span style="color:#66d9ef">)</span>
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">$(TARGET)</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">$(</span>OBJECTS<span style="color:#66d9ef">)</span>
 	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> -o $@ $^
 
 <span style="color:#75715e"># ソースファイルからオブジェクトファイルを作成
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span> %.c
-	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> -o $@ <span style="color:#66d9ef">$(</span>CFLAGS<span style="color:#66d9ef">)</span> -c $&lt;
+	<span style="color:#66d9ef">$(</span>CC<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>CFLAGS<span style="color:#66d9ef">)</span> -c $&lt;
 
 <span style="color:#75715e"># リソースファイルからオブジェクトファイルを作成
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span> %.rc
@@ -419,7 +418,7 @@ CFLAGS <span style="color:#f92672">=</span> <span style="color:#ae81ff">\ </span
 
 <span style="color:#75715e"># オブジェクトファイルを削除
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
-	-@rm -f <span style="color:#66d9ef">$(</span>OBJS<span style="color:#66d9ef">)</span>
+	-@rm -f <span style="color:#66d9ef">$(</span>OBJECTS<span style="color:#66d9ef">)</span>
 </code></pre></div></div>
 </figure>
 <h3 id="メインウィンドウの表示その3">メインウィンドウの表示(その3)</h3>
