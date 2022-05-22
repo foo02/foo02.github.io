@@ -16,7 +16,8 @@
     <li><a href="#texの利点">TeXの利点</a></li>
     <li><a href="#texの処理">TeXの処理</a></li>
     <li><a href="#texの導入">TeXの導入</a></li>
-    <li><a href="#texの使用">TeXの使用</a></li>
+    <li><a href="#lyxの設定">LyXの設定</a></li>
+    <li><a href="#beamerの設定">Beamerの設定</a></li>
   </ul>
 </nav>
 </header><div id="content">
@@ -52,14 +53,37 @@
 </tbody>
 </table>
 <p>TeX Liveには組版に必要なプログラムがすべて含まれています。LyXはTeXを使いやすくするためのエディタです。ワープロのようなインターフェイスで文書を作成・編集することができます。Sumatra PDFは組版処理されたPDF形式の文書を確認するために使用します。これらのインストールの詳細については<a href="https://texwiki.texjp.org/">TeX Wiki</a>を参照してください。</p>
-<h2 id="texの使用">TeXの使用</h2>
-<p>LyXの基本的な使い方はヘルプのチュートリアルを参照してください。日本語の文書を作成するには日本語用の文書クラス(<a href="https://texwiki.texjp.org/?cmd=read&amp;page=jsclasses&amp;word=%E6%96%87%E6%9B%B8%E3%82%AF%E3%83%A9%E3%82%B9">jsclasses</a>もしくは<a href="https://texwiki.texjp.org/?BXjscls">BXjscls</a>)を選択する必要があります。</p>
-<p>コンパイル時に文字コードに関するエラーが出る場合は以下のようにします。</p>
-<ul>
-<li>文書の文字コードに&quot;日本語(pLaTeX)(UTF-8)&quot;を指定する</li>
-<li>PDF特性の追加オプションに&quot;unicode=false&quot;を指定する</li>
-</ul>
-<p><a href="https://ja.wikipedia.org/wiki/Beamer">Beamer</a>はスライドを作成するための文書クラスです。Beamerを使用するにはdvipdfmが正しく機能するように<a href="https://qiita.com/zr_tex8r/items/69e8cc32038ff29f5ac3#uplatex%E3%81%AE%E5%A0%B4%E5%90%88">今さら人に聞けない「日本語でBeamer」のキホン - Qiita</a>に従って文書を設定する必要があります。</p>
+<h2 id="lyxの設定">LyXの設定</h2>
+<p>LyXの設定については<a href="https://texwiki.texjp.org/?LyX">LyX - TeX Wiki</a>を参照してください。</p>
+<p>日本語の文書を作成するにはコンパイル時に文字コードに関するエラーが出ないように文書を設定する必要があります。設定方法は次のとおり。</p>
+<ol>
+<li>LyXを起動します。</li>
+<li>メニューから <em>文書 -&gt; 設定</em> を選択して左のリストから<em>文書クラス</em>を選択します。</li>
+<li><em>文書クラス</em>から日本語用の文書クラス(<a href="https://texwiki.texjp.org/?cmd=read&amp;page=jsclasses&amp;word=%E6%96%87%E6%9B%B8%E3%82%AF%E3%83%A9%E3%82%B9">jsclasses</a>もしくは<a href="https://texwiki.texjp.org/?BXjscls">BXjscls</a>)を選択します。</li>
+<li>左のリストから<em>言語</em>を選択して<em>文字コード</em>の<em>その他</em>から <em>日本語(pLaTeX)(UTF-8)</em> を選択します。</li>
+<li>左のリストから<em>PDF特性</em>を選択して<em>追加オプション</em>にunicode=falseと入力します。</li>
+<li><em>OK</em>をクリックします。</li>
+</ol>
+<p>LyXの基本的な使い方はヘルプのチュートリアルを参照してください。</p>
+<h2 id="beamerの設定">Beamerの設定</h2>
+<p><a href="https://ja.wikipedia.org/wiki/Beamer">Beamer</a>はスライドを作成するための文書クラスです。Beamerを使用するにはdvipdfmが正しく機能するように文書を設定する必要があります。設定方法は次のとおり。</p>
+<ol>
+<li>LyXを起動します。</li>
+<li>メニューから <em>文書 -&gt; 設定</em> を選択して左のリストから<em>文書クラス</em>を選択します。</li>
+<li><em>文書クラス</em>から<em>Beamer</em>を選択して<em>クラスオプション</em>の<em>任意設定</em>にdvipdfmと入力します。</li>
+<li>左のリストから<em>LaTeXプリアンブル</em>を選択して以下の内容を入力します。</li>
+</ol>
+
+
+<figure class="xCodeBlock">
+
+<div class="xCodeBlock_code"><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-LaTeX" data-lang="LaTeX"><span style="color:#66d9ef">\usepackage</span>{bxdpx-beamer}
+<span style="color:#66d9ef">\usepackage</span>{pxjahyper}</code></pre></div></div>
+</figure>
+<ol start="5">
+<li><em>OK</em>をクリックします。</li>
+</ol>
+<p>詳細については<a href="https://qiita.com/zr_tex8r/items/69e8cc32038ff29f5ac3">今さら人に聞けない「日本語でBeamer」のキホン - Qiita</a>を参照してください。</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
